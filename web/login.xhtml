@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+        <link rel="stylesheet" href="css/login.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+    
+    </h:head>
+    <h:body>
+        <div class="row header_height header-color">
+                <div class="col-3">
+                    <p class="font_color">Logo side</p>
+                </div>
+                <div class="col-6 text-center" >
+                    <p class="mt-2 font-weight-bold header_text">
+                        Log In
+                    </p>
+                </div>
+                <div class="col-3 text-center pt-3">
+                    <h:form>
+                        <h:commandLink class="font_color" action="index">Nazad</h:commandLink>
+                    </h:form>
+                </div>
+            </div>
+            <div class="main_content background_image_login">
+                <div class="row m-auto">
+                    <div class="col-12">
+                        <h:form class="form m-auto ">
+                            <h:panelGrid columns="1" class="text-center">
+                              
+                                <h:panelGrid columns="1" class="text-center" rendered="#{korisnik.msgLogIn!=null}">
+                                    <div class="alert alert-warning alert-dismissible" >
+                                        <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+                                        #{korisnik.msgLogIn}
+                                    </div>
+                                </h:panelGrid>
+                                
+                                <h:panelGrid columns="3" class="text-center">
+                                    <p>Korisnicko ime: </p>
+                                    <h:inputText value="#{korisnik.username}" id="username"
+                                                 required="true" requiredMessage="Morate uneti korisnicko ime"/>
+                                    <p:message for="username" />             
+                                    <p>Lozinka:</p>
+                                    <h:inputSecret value="#{korisnik.password}" id="password"
+                                                   required="true" requiredMessage="Morate uneti lozinku"
+                                    >                           
+                                    </h:inputSecret>
+                                    <p:message for="password" />       
+                                </h:panelGrid>    
+                                <h:commandButton class="btn_login" action="#{korisnik.login()}" value="Uloguj se"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        <div class="row footer_bottom_margin footer-color">
+            <div class="col-12 text-center footer_height">
+                <p class="font-weight-bold font-italic footer_text">
+
+                </p>
+            </div>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/regKorisnik.css"></link>
+    <h:head>
+        <title>AdminInfo</title>
+        <f:event type="preRenderView" listener="#{korisnik.login()}"></f:event>
+    </h:head>
+    <h:body>
+        <div class="full_page">
+            <div class="row header_height header-color">
+                <div class="col-3">
+                    <p class="font_color">Logo side</p>
+                </div>
+                <div class="col-6 text-center" >
+                    <p class="mt-2 font-weight-bold header_text">
+                        Welcome #{korisnikController.k.ime}
+                    </p>
+                </div>
+                <div class="col-3 text-center pt-3">
+                    <h:form>
+                        <h:commandLink class="mr-3 font_color" action="login">Rezervacije</h:commandLink>
+                        <h:commandLink class="font_color" action="registracija">Poseceni Festivali</h:commandLink>
+                        <h:commandLink class="ml-3 font_color" action="#{korisnik.logOut()}">LogOut</h:commandLink>
+                    </h:form>
+                </div>
+            </div>
+            <div class="row row1">
+                <div class="col-10 nopadding">
+                    <h:form class="form m-auto">
+                        <h:dataTable class="table m-auto" style="color: white" value="#{korisnik.loginKorisnik}" var="kor">
+                            <h:column>
+                                <f:facet name="header">
+                                    Username:
+                                </f:facet>
+                                #{kor.username}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Password:
+                                </f:facet>
+                                #{kor.password}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Ime:
+                                </f:facet>
+                                #{kor.ime}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Prezime:
+                                </f:facet>
+                                #{kor.prezime}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    E-mail:
+                                </f:facet>
+                                #{kor.email}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Kontakt mob:
+                                </f:facet>
+                                #{kor.kontaktMob}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Datum rodjenja:
+                                </f:facet>
+                                #{kor.datumRodjenja}
+                            </h:column>    
+                            <h:column>
+                                <f:facet name="header">
+                                    Tip korisnika:
+                                </f:facet>
+                                #{kor.tipKorisnikaString}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Broj prekrsaja:
+                                </f:facet>
+                                #{kor.brojPrekrsaja}
+                            </h:column>  
+                            <h:column>
+                                <f:facet name="header">
+                                    Prepravi Koisnika:
+                                </f:facet>
+                                <h:selectOneMenu value = "#{korisnik.tipKorisnikaIntPromena}"> 
+                                    <f:selectItem itemValue = "1" itemLabel = "Zahtev na cekanju" /> 
+                                    <f:selectItem itemValue = "2" itemLabel = "Registrovan" /> 
+                                    <f:selectItem itemValue = "3" itemLabel = "Prodavac" /> 
+                                    <f:selectItem itemValue = "4" itemLabel = "Admin" /> 
+                                    <f:selectItem itemValue = "5" itemLabel = "Banovan" />     
+                                </h:selectOneMenu>   
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Potvrdi promenu:
+                                </f:facet>
+                                <h:commandButton action="#{korisnik.promeniTipKorisnika(kor.username,korisnik.tipKorisnikaIntPromena)}" value="Potvrdi"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Odbaci zahtev:
+                                </f:facet>
+                                <h:commandButton action="#{korisnik.odbaciZahtev(kor.username,kor.password)}" value="Odbaci"/>
+                            </h:column>
+                        </h:dataTable> 
+                    </h:form>
+                </div>
+                <div class="col-2 text-center heightMax font_color">
+                    
+                </div>
+            </div>
+            <div class="row footer_bottom_margin">
+                <div class="col-12 text-center footer_height footer-color">
+                    <p class="font-weight-bold footer_text">
+                        Hvala na poseti!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Projekcije</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="css/opisFestival.css"></link>
+    </h:head>
+    <h:body>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <h:form class="form m-auto">
+                        <h:dataTable class="table m-auto" value="#{projekcijaDAO.listaProjekcija(festival.odabraniFestival.idFestival)}" var="p">
+                            <h:column>
+                                <f:facet name="header">
+                                    Originalni naziv:
+                                </f:facet>
+                                #{p.originalniNazivFilma}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv na srpskom:
+                                </f:facet>
+                                #{p.nazivFilmaNaSrpskom}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Datum projekcije:
+                                </f:facet>
+                                #{p.datumProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Vreme
+                                </f:facet>
+                                #{p.vremeProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Lokacija:
+                                </f:facet>
+                                #{p.lokacija}
+                            </h:column>        
+                            <h:column>
+                                <f:facet name="header">
+                                    Sala:
+                                </f:facet>
+                                #{p.sala}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Cena ulaznice:
+                                </f:facet>
+                                #{p.cena}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Broj ulaznica:
+                                </f:facet>
+                                #{p.maxUlaznica}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Broj ulaznica:
+                                </f:facet>
+                                <h:inputText size="3">
+                                    #{projekcija.brojRezervisanihUlaznicaZaProjekciju}
+                                </h:inputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    
+                                </f:facet>
+                                <h:commandButton value="rezrvisi" action="rezervacija"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
+
+
