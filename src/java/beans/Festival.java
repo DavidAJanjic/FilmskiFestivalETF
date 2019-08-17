@@ -24,6 +24,7 @@ public class Festival implements Serializable {
     private int maxUlaznicaF;
     private int idMesto;
     private String mesto;
+    private String opis;
 
     private int poslednjiIdFestival;
 
@@ -40,6 +41,15 @@ public class Festival implements Serializable {
     public List<Festival> odabraniFestivalIndex = new ArrayList<>();
     public Festival odabraniFestival;
 
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    
     public List<Festival> getOdabraniFestivalIndex() {
         return odabraniFestivalIndex;
     }
@@ -141,14 +151,11 @@ public class Festival implements Serializable {
         this.odabraniFestival = FestivalDAO.dohvatiInfoFestival(fest);
         return "opisFestival";
     }
-
+    
     public String dohvatiFestivaleZaIndex() throws SQLException {
 
         this.odabraniFestivalIndex = FestivalDAO.dohvatiFestivaleZaIndex(naziv, datumOd, datumDo);
 
-        if (odabraniFestivalIndex.isEmpty()) {
-            return "ispisFestivalaZaNeReg";
-        }
         return "ispisFestivalaZaNeReg";
     }
 

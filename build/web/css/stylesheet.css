@@ -1,0 +1,38 @@
+.header_height{
+    height: 4rem;
+}
+.footer_height{
+    height: 4rem;
+}
+.full_page{
+    height: 100% !important;
+    width: 100% !important; 
+    background-color: background;
+    padding: 0;
+}
+.footer_bottom_margin{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+}
+.row{
+    margin: 0 !important;
+}
+.header_text{
+    font-size: 30px;
+    color: gold;
+}
+.footer_text{
+    font-size: 30px;
+    color: gold;
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+.ui-calendar > .ui-datepicker-trigger {
+  display:inline;
+}

@@ -116,9 +116,12 @@ public class KorisnikDAO {
             if (rs.next()) {
                 String passwordProvera = rs.getString("password");
                 String newPasswod = newPasswrd;
-                if (passwordProvera == newPasswod) {
-                    
-                }return "vecPostoji";
+                if (passwordProvera.equals(newPasswod)) {
+                    return "istaSifra";
+                }
+                if (passwordProvera.trim().length() == 0) {
+                    return "neostojeciKorisnik";
+                }
             }
 
             String sql = "UPDATE korisnik SET password= ? WHERE username = ? and password = ?;";
@@ -209,16 +212,16 @@ public class KorisnikDAO {
             ps.executeUpdate();
         }
     }
-    
-    public static void odbaciZahtev(String username, String password) throws SQLException{
-        String sql= "delete from korisnik where username = ? and password = ?;";
-         try (
+
+    public static void odbaciZahtev(String username, String password) throws SQLException {
+        String sql = "delete from korisnik where username = ? and password = ?;";
+        try (
                 Connection connection = DB.otvoriKonekciju();
                 PreparedStatement ps = connection.prepareStatement(sql);) {
             ps.setString(1, username);
             ps.setString(2, password);
             ps.executeUpdate();
-         }
+        }
 
     }
 }

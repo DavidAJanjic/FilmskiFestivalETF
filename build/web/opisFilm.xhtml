@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>O filmu</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="css/opisFestival.css"></link>
+    </h:head>
+    <h:body>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <h:form class="form m-auto">
+                        <h:dataTable class="table m-auto" value="#{film.listaFilmova}" var="f">
+                            <h:column>
+                                <f:facet name="header">
+                                    Originalni naziv filma:
+                                </f:facet>
+                                #{f.originalniNaziv}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv na srpskom:
+                                </f:facet>
+                                #{f.nazivNaSrpskom}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Godina izdanja:
+                                </f:facet>
+                                #{f.godinaIzdanja}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Opis:
+                                </f:facet>
+                                #{f.filmOpis}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Reziser:
+                                </f:facet>
+                                #{f.nazivReziser}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    Spisak glavnih glumaca:
+                                </f:facet>
+                                #{f.sviGlumciFilma}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    Trajanje:
+                                </f:facet>
+                                #{f.trajanjeFilma}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    Zemlja porekla:
+                                </f:facet>
+                                #{f.zemljaPorekla}
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    IMDB link:
+                                </f:facet>
+                                <h:commandLink>IMDB</h:commandLink>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                #{f.poster}
+                            </h:column> 
+
+
+                            <h:column>
+                                <f:facet name="header">
+                                    Broj ulaznica:
+                                </f:facet>
+                                <p:inputNumber  decimalPlaces="0" maxlength="3" minValue="1" maxValue="100" value="#{projekcija.brojRezervisanihUlaznicaZaProjekciju}" >
+                                    
+                                </p:inputNumber>
+                            </h:column>-->
+                            <h:column>
+                                <f:facet name="header">
+                                    Rezervacija:
+                                </f:facet>
+                                <h:commandButton  value="Rezervisi"/>
+                            </h:column>                           
+                        </h:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

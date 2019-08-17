@@ -1,6 +1,8 @@
 package beans;
 
 import DAO.FilmDAO;
+import java.sql.SQLException;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -14,6 +16,7 @@ public class Film {
     private int godinaIzdanja;
     private String filmOpis;
     private int idReziser;
+    private String nazivReziser;
     private int idZemljePorekla;
     private int trajanjeFilma;
     private String imdbLink;
@@ -21,8 +24,11 @@ public class Film {
     private int ocenaSUM;
     private int ocenaCOUNT;
     private int idGlumac;
+    private String zemljaPorekla;
+    private String sviGlumciFilma;
 
     private int poslednjiIdFilm;
+    private List <Film> listaFilmova;
 
     public Film() {
     }
@@ -68,6 +74,38 @@ public class Film {
         this.idGlumac = idGlumac;
     }
 
+    public String getSviGlumciFilma() {
+        return sviGlumciFilma;
+    }
+
+    public void setSviGlumciFilma(String sviGlumciFilma) {
+        this.sviGlumciFilma = sviGlumciFilma;
+    }
+    
+    public String getZemljaPorekla() {
+        return zemljaPorekla;
+    }
+
+    public void setZemljaPorekla(String zemljaPorekla) {
+        this.zemljaPorekla = zemljaPorekla;
+    }
+    
+    public String getNazivReziser() {
+        return nazivReziser;
+    }
+
+    public void setNazivReziser(String nazivReziser) {
+        this.nazivReziser = nazivReziser;
+    }
+    
+    public List<Film> getListaFilmova() {
+        return listaFilmova;
+    }
+
+    public void setListaFilmova(List<Film> listaFilmova) {
+        this.listaFilmova = listaFilmova;
+    }
+    
     public int getIdFilm() {
         return idFilm;
     }
@@ -184,5 +222,8 @@ public class Film {
         FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac);
 
     }
-
+    public String ispisFilmZaKorisnika(String originalniNazivFilma) throws SQLException{
+        this.listaFilmova = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma);
+        return "opisFilm";
+    }
 }

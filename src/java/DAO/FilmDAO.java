@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DB;
@@ -64,5 +66,44 @@ public class FilmDAO {
         }
         return false;
     }
-    
+    public static List<Film> ispisFilmaZaKorisnika(String originalniNazivFilma) throws SQLException{
+        List<Film> listaFilmova = new ArrayList<Film>();
+        String glumci = "";
+        String sql1 = "select * from film f, uloge u, glumci g "
+                + "where f.idFilm = u.idFilm and u.idGlumac = g.idGlumac and f.originalniNaziv = ?;";
+        try (Connection connection = DB.otvoriKonekciju();
+            PreparedStatement ps = connection.prepareStatement(sql1);){
+            ps.setString(1, originalniNazivFilma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                glumci += rs.getString("imeGlumci") + ",";
+            }
+        }
+        glumci = glumci.substring(0, glumci.length()-1);
+        String sql = "select * from film f, reziseri r, zemlje_porekla z where f.idReziser = r.idReziser "
+                + "and f.idZemljePorekla = z.idZemljePorekla and f.originalniNaziv = ?";
+        try (Connection connection = DB.otvoriKonekciju();
+            PreparedStatement ps = connection.prepareStatement(sql);){
+            ps.setString(1, originalniNazivFilma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Film film = new Film();
+                film.setNazivNaSrpskom(rs.getString("nazivNaSrpskom"));
+                film.setOriginalniNaziv(rs.getString("originalniNaziv"));
+                film.setPoster(rs.getString("Poster"));
+                film.setGodinaIzdanja(rs.getInt("godinaIzdanja"));
+                film.setFilmOpis(rs.getString("filmOpis"));
+                film.setNazivReziser(rs.getString("imeReziseri"));
+                film.setTrajanjeFilma(rs.getInt("trajanjeFilma"));
+                film.setZemljaPorekla(rs.getString("imeZemljaPorekla"));
+                film.setImdbLink(rs.getString("imdbLink"));
+                film.setSviGlumciFilma(glumci);
+                listaFilmova.add(film);
+                
+            }
+        }
+            
+        
+        return listaFilmova;
+    }
 }

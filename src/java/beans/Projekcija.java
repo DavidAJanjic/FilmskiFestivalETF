@@ -30,7 +30,39 @@ public class Projekcija {
     private int brojRezervisanihUlaznicaZaProjekciju;
     private int maxUlaznicaP;
     private int idLokacija;
+    private String NazivFilmaNaSrpskom;
+    private String OriginalniNazivFilma;
 
+    public List<Projekcija> projekcijeZaIspis;
+
+    public String getNazivFilmaNaSrpskom() {
+        return NazivFilmaNaSrpskom;
+    }
+
+    public void setNazivFilmaNaSrpskom(String NazivFilmaNaSrpskom) {
+        this.NazivFilmaNaSrpskom = NazivFilmaNaSrpskom;
+    }
+
+    public String getOriginalniNazivFilma() {
+        return OriginalniNazivFilma;
+    }
+
+    public void setOriginalniNazivFilma(String OriginalniNazivFilma) {
+        this.OriginalniNazivFilma = OriginalniNazivFilma;
+    }
+
+    
+   
+
+    public List<Projekcija> getProjekcijeZaIspis() {
+        return projekcijeZaIspis;
+    }
+
+    public void setProjekcijeZaIspis(List<Projekcija> projekcijeZaIspis) {
+        this.projekcijeZaIspis = projekcijeZaIspis;
+    }
+    
+    
     public int getBrojRezervisanihUlaznicaZaProjekciju() {
         return brojRezervisanihUlaznicaZaProjekciju;
     }
@@ -173,14 +205,20 @@ public class Projekcija {
     public void setIdLokacija(int idLokacija) {
         this.idLokacija = idLokacija;
     }
-    
-    
+
     
     public String ispisNaZahtevRegKosinika() throws SQLException{
         
         this.IspisRegKorisnika = ProjekcijaDAO.ispisNaZahtevRegKosinika(nazivFestivalaZaProjekciju,nazivFilmaNaSrpskomIliStraniNazivFilma,FestivaldatumOd,FestivaldatumDo);
-        
-        return "ispisZaRegKorisnika";
+        if ((nazivFilmaNaSrpskomIliStraniNazivFilma.trim().length() != 0)) {
+            return "ispisZaRegKorisnikaSaOrgNazivom";
+        }
+        return "ispisZaRegKorisnikaBezOrgNaziva";
     }
+    public String ispisProjekcija(String nazivFestivalaZaProjekciju) throws SQLException{
+        this.projekcijeZaIspis = ProjekcijaDAO.listaProjekcija1(nazivFestivalaZaProjekciju);
+        return "projekcijeP";
+    }
+    
     
 }

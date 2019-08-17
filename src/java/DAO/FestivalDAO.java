@@ -73,6 +73,7 @@ public class FestivalDAO implements Serializable {
                 festival2.setFestivalOpis(rs.getString("festivalOpis"));
                 festival2.setMaxUlaznicaF(rs.getInt("maxUlaznicaF"));
                 festival2.setMesto(rs.getString("imeMesto"));
+                festival2.setOpis(rs.getString("festivalOpis"));
 
             }
 

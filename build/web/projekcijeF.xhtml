@@ -2,53 +2,71 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Opis Festivala</title>
+        <title>Projekcije</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-        <link rel="stylesheet" href="css/opisFestival.css"></link>
     </h:head>
     <h:body>
         <div>
             <div class="row">
                 <div class="col-12">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" value="#{festival.odabraniFestival}" var="fest">
+                        <h:dataTable class="table m-auto" value="#{projekcijaDAO.listaProjekcija(festival.odabraniFestival.idFestival)}" var="p">
                             <h:column>
                                 <f:facet name="header">
-                                    Naziv:
+                                    Originalni naziv:
                                 </f:facet>
-                                #{fest.naziv}
+                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma)}">#{p.originalniNazivFilma}</h:commandLink>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Datum od:
+                                    Naziv na srpskom:
                                 </f:facet>
-                                #{fest.datumOd}
+                                #{p.nazivFilmaNaSrpskom}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Datum do:
+                                    Datum projekcije:
                                 </f:facet>
-                                #{fest.datumDo}
+                                #{p.datumProjekcije}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Grad:
+                                    Vreme
                                 </f:facet>
-                                #{fest.mesto}
+                                #{p.vremeProjekcije}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Opis:
+                                    Lokacija:
                                 </f:facet>
-                                #{fest.opis}
+                                #{p.lokacija}
                             </h:column>        
                             <h:column>
                                 <f:facet name="header">
-                                    Projekcije:
+                                    Sala:
                                 </f:facet>
-                                <h:commandButton action="projekcijeF" value="Projekcije"/>
+                                #{p.sala}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Cena ulaznice:
+                                </f:facet>
+                                #{p.cena}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Broj ulaznica:
+                                </f:facet>
+                                #{p.maxUlaznicaP}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    
+                                </f:facet>
+                                <h:commandButton value="Rezrvisi" action="#{projekcija.izvrsiRezervaciju(p.idP)}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -57,4 +75,6 @@
         </div>
     </h:body>
 </html>
+
+
 

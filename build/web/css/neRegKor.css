@@ -1,0 +1,84 @@
+.header_height{
+    height: 4rem;
+}
+.footer_height{
+    height: 4rem;
+}
+.footer_bottom_margin{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    height: 4rem;
+}
+.row{
+    margin: 0 !important;
+}
+.header_text{
+    font-size: 30px;
+    color: #feda6a;
+     text-transform: uppercase;
+}
+.footer_text{
+    font-size: 30px;
+    color: #feda6a;
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+    width: 100%;
+    background: rgba(0,0,0, 0.6);
+    padding: 5rem;
+}
+.input{
+    border: none;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 1rem;
+    width: 15rem;
+    background-color: transparent;
+    color:  #feda6a;
+}
+.input:hover{
+    border: 1px solid lightgray;
+}
+.main_content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 89%;
+}
+p{
+    font-size: 60px;
+    color: white;
+    color: #feda6a;
+    font-weight: bold;
+}
+.background_image_change_password{
+    background-image: url(http://www.toca-ch.com/data/walls/74/23722339.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.header-color, .footer-color{
+    background-color:  #1d1e22;
+}
+.btn_change_pass{
+    background-color: #287B6B;
+    color: white;
+    border: 1px solid #287B6B;
+    border-radius: 5px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.font_color{
+    color: #feda6a;
+}

@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Show festival</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="css/opisFestival.css"></link>
+    </h:head>
+    <h:body>
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <h:form class="form m-auto">
+                        <h:dataTable class="table m-auto" value="#{projekcija.ispisRegKorisnika}" var="p">
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv filma:
+                                </f:facet>
+                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma)}">#{p.originalniNazivFilma}</h:commandLink>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv festivala:
+                                </f:facet>
+                                #{p.nazivFestivalaZaProjekciju}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Datum projekcije filma:
+                                </f:facet>
+                                #{p.datumProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Vreme projekcije filma:
+                                </f:facet>
+                                #{p.vremeProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Mesto odrzavanja:
+                                </f:facet>
+                                #{p.nazivMestaZaProjekciju}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv bioskopa:
+                                </f:facet>
+                                #{p.lokacija}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Naziv bioskopske sale:
+                                </f:facet>
+                                #{p.nazivSale}
+                            </h:column>
+<!--ovo je input za broj karta za rezervaciju <h:column>
+                                <f:facet name="header">
+                                    Broj ulaznica:
+                                </f:facet>
+                                <p:inputNumber  decimalPlaces="0" maxlength="3" minValue="1" maxValue="100" value="#{projekcija.brojRezervisanihUlaznicaZaProjekciju}" >
+                                    
+                                </p:inputNumber>
+                            </h:column>-->
+<!--                            <h:column>
+                                <f:facet name="header">
+                                    Rezervacija:
+                                </f:facet>
+                                <h:commandButton  value="Rezervisi"/>
+                            </h:column>                           -->
+                        </h:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

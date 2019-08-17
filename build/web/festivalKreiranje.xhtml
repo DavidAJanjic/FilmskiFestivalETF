@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h2>Dodavanje novog festivala</h2>
+        
+        <h:form>
+            <h:messages></h:messages>
+            <h:panelGrid columns="2">
+                Naziv festiala: 
+                <h:inputText value="#{festival.naziv}"
+                             required="true" requiredMessage="Morate uneti naziv festiala"/>
+                
+                Mesto odrzavanja festivala:
+                        <h:selectOneMenu value="#{festival.idMesto}">
+                            <f:selectItem itemLabel="Izaberite mesto odrzavanja festivala" itemValue=""/>
+                            <f:selectItems value="#{mestoFestivala.dohvatiMesta()}"></f:selectItems>
+                        </h:selectOneMenu>
+                
+                Datum pocetka festivala:
+                <p:calendar mode="popup" value="#{festival.datumOd}" 
+                            navigator="true" required="true" >
+                    
+                </p:calendar>
+                
+                Datum kraja festivala:
+                <p:calendar mode="popup" value="#{festival.datumDo}" 
+                            navigator="true" required="true" >
+                    
+                </p:calendar>
+                
+                Opis festivala: 
+                <h:inputTextarea value="#{festival.festivalOpis}"
+                             required="true" 
+                             requiredMessage="Morate uneti opis festivala">
+                </h:inputTextarea>
+                
+                Maksimalan broj ulaznica za festival:
+                        <h:inputText value="#{festival.maxUlaznicaF}">
+                            <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="4" />                         
+                        </h:inputText> 
+                
+                <h:commandButton action="#{festival.ubaciNoviFestival()}" value="Nastavi na ubacivanje projekcija"/>
+                
+                <h:commandButton action="#{korisnik.nazad()}" value="Nazad" immediate="true"/>
+                
+            </h:panelGrid>
+            
+        </h:form>
+    </h:body>
+</html>
+

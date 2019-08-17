@@ -1,0 +1,113 @@
+.header_height{
+    height: 4rem;
+}
+.footer_height{
+    height: 4rem;
+}
+.full_page{
+    height: 100% !important;
+    width: 100% !important; 
+    padding: 0;
+}
+.footer_bottom_margin{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    height: 4rem;
+}
+.row{
+    margin: 0 !important;
+}
+.header_text{
+    font-size: 30px;
+    color: #feda6a;
+    text-transform: uppercase;
+}
+.footer_text{
+    font-size: 30px;
+    color: #feda6a;
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+}
+.font_color{
+    color: #feda6a;
+}
+.header-color, .footer-color{
+    background-color:  #1d1e22;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+    width: 40%;
+    background: rgba(0,0,0, 0.6);
+    padding: 5rem;
+}
+.heightMax{
+    height: 100%;
+    background-color: #1d1e22;
+}
+.row1{
+    height: 94%;
+    background-color: #1d1e22;
+}
+.indexButton{
+    margin-top: 1rem;
+    background-color: #feda6a;
+    border: 1px solic #feda6a;
+    border-radius: 5px;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.nopadding{
+    padding: 0;
+    height: 100;
+}
+.img-carousel{
+    height: 50%;
+}
+.background_image_registration{
+    background-image: url(https://images.unsplash.com/photo-1485727296248-6b44e6a35ab6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.main_content_registration{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 89%;
+}
+.input_registration{
+    border: none;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 1rem;
+    width: 15rem;
+    background-color: transparent;
+    color:  #feda6a;
+}
+.input_registration:hover{
+    border: 1px solid lightgray;
+}
+.btn_registration{
+    background-color: #287B6B;
+    color: white;
+    border: 1px solid #287B6B;
+    border-radius: 5px;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+p{
+    font-size: 22px;
+    color: white;
+    color: #feda6a;
+    font-weight: bold;
+}

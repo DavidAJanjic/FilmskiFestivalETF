@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Opis Festivala</title>
+        <title>Show festival</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
         <link rel="stylesheet" href="css/opisFestival.css"></link>
     </h:head>
@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" value="#{festival.odabraniFestival}" var="fest">
+                        <h:dataTable class="table m-auto" value="#{festival.odabraniFestivalIndex}" var="fest">
                             <h:column>
                                 <f:facet name="header">
                                     Naziv:
@@ -34,21 +34,9 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Grad:
+                                    Mesto odrzavanja:
                                 </f:facet>
                                 #{fest.mesto}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Opis:
-                                </f:facet>
-                                #{fest.opis}
-                            </h:column>        
-                            <h:column>
-                                <f:facet name="header">
-                                    Projekcije:
-                                </f:facet>
-                                <h:commandButton action="projekcijeF" value="Projekcije"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
