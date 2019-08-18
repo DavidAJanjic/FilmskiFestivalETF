@@ -60,10 +60,7 @@ public class ProjekcijaDAO implements Serializable {
     public static List<Projekcija> listaProjekcija(int idFestivala) throws SQLException {
         List<Projekcija> projekcije = new ArrayList<>();
         
-        String sql = "select projekcija.cena, projekcija.datumProjekcije,projekcija.vremeProjekcije,projekcija.idProjekcija,"
-                + "projekcija.maxUlaznicaP,lokacija.imeLokacija,lokacija.nazivSale,film.nazivNaSrpskom,film.originalniNaziv "
-                + "from projekcija,film,lokacija "
-                + "where projekcija.idFestival = ? and projekcija.idFilm = film.idFilm and projekcija.idLokacija = lokacija.idLokacija;";
+        String sql = "select projekcija.cena, projekcija.datumProjekcije,projekcija.vremeProjekcije,projekcija.idProjekcija, projekcija.maxUlaznicaP,lokacija.imeLokacija,lokacija.nazivSale,film.nazivNaSrpskom,film.originalniNaziv, festival.naziv from projekcija,film,lokacija, festival where projekcija.idFestival = ? and projekcija.idFilm = film.idFilm and projekcija.idLokacija = lokacija.idLokacija and projekcija.idFestival = festival.idFestival;";
 
         try (
                 Connection c = DB.otvoriKonekciju();
@@ -82,6 +79,7 @@ public class ProjekcijaDAO implements Serializable {
                 projekcija.setMaxUlaznicaP(rs.getInt("maxUlaznicaP"));
                 projekcija.setVremeProjekcije(rs.getTime("vremeProjekcije"));
                 projekcija.setIdP(rs.getInt("idProjekcija"));
+                projekcija.setNazivFestivalaZaProjekciju(rs.getString("naziv"));
 
                 projekcije.add(projekcija);
             }

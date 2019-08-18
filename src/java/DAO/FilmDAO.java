@@ -66,8 +66,8 @@ public class FilmDAO {
         }
         return false;
     }
-    public static List<Film> ispisFilmaZaKorisnika(String originalniNazivFilma) throws SQLException{
-        List<Film> listaFilmova = new ArrayList<Film>();
+    public static Film ispisFilmaZaKorisnika(String originalniNazivFilma,String nazivFestivalaZaProjekciju) throws SQLException{
+        
         String glumci = "";
         String sql1 = "select * from film f, uloge u, glumci g "
                 + "where f.idFilm = u.idFilm and u.idGlumac = g.idGlumac and f.originalniNaziv = ?;";
@@ -80,30 +80,31 @@ public class FilmDAO {
             }
         }
         glumci = glumci.substring(0, glumci.length()-1);
+        Film film1 = new Film();
         String sql = "select * from film f, reziseri r, zemlje_porekla z where f.idReziser = r.idReziser "
                 + "and f.idZemljePorekla = z.idZemljePorekla and f.originalniNaziv = ?";
         try (Connection connection = DB.otvoriKonekciju();
             PreparedStatement ps = connection.prepareStatement(sql);){
             ps.setString(1, originalniNazivFilma);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                Film film = new Film();
-                film.setNazivNaSrpskom(rs.getString("nazivNaSrpskom"));
-                film.setOriginalniNaziv(rs.getString("originalniNaziv"));
-                film.setPoster(rs.getString("Poster"));
-                film.setGodinaIzdanja(rs.getInt("godinaIzdanja"));
-                film.setFilmOpis(rs.getString("filmOpis"));
-                film.setNazivReziser(rs.getString("imeReziseri"));
-                film.setTrajanjeFilma(rs.getInt("trajanjeFilma"));
-                film.setZemljaPorekla(rs.getString("imeZemljaPorekla"));
-                film.setImdbLink(rs.getString("imdbLink"));
-                film.setSviGlumciFilma(glumci);
-                listaFilmova.add(film);
+            if (rs.next()){
+                //Film film = new Film();
+                film1.setNazivNaSrpskom(rs.getString("nazivNaSrpskom"));
+                film1.setOriginalniNaziv(rs.getString("originalniNaziv"));
+                film1.setPoster(rs.getString("Poster"));
+                film1.setGodinaIzdanja(rs.getInt("godinaIzdanja"));
+                film1.setFilmOpis(rs.getString("filmOpis"));
+                film1.setNazivReziser(rs.getString("imeReziseri"));
+                film1.setTrajanjeFilma(rs.getInt("trajanjeFilma"));
+                film1.setZemljaPorekla(rs.getString("imeZemljaPorekla"));
+                film1.setImdbLink(rs.getString("imdbLink"));
+                film1.setSviGlumciFilma(glumci);
+                film1.setNazivFestivalaZaDatiFilm(nazivFestivalaZaProjekciju);
                 
             }
         }
             
         
-        return listaFilmova;
+        return film1;
     }
 }

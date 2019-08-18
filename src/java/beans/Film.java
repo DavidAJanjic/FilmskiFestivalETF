@@ -26,9 +26,10 @@ public class Film {
     private int idGlumac;
     private String zemljaPorekla;
     private String sviGlumciFilma;
+    private String nazivFestivalaZaDatiFilm;
 
     private int poslednjiIdFilm;
-    private List <Film> listaFilmova;
+    private Film film;
 
     public Film() {
     }
@@ -74,6 +75,22 @@ public class Film {
         this.idGlumac = idGlumac;
     }
 
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+    
+    public String getNazivFestivalaZaDatiFilm() {
+        return nazivFestivalaZaDatiFilm;
+    }
+
+    public void setNazivFestivalaZaDatiFilm(String nazivFestivalaZaDatiFilm) {
+        this.nazivFestivalaZaDatiFilm = nazivFestivalaZaDatiFilm;
+    }
+    
     public String getSviGlumciFilma() {
         return sviGlumciFilma;
     }
@@ -96,14 +113,6 @@ public class Film {
 
     public void setNazivReziser(String nazivReziser) {
         this.nazivReziser = nazivReziser;
-    }
-    
-    public List<Film> getListaFilmova() {
-        return listaFilmova;
-    }
-
-    public void setListaFilmova(List<Film> listaFilmova) {
-        this.listaFilmova = listaFilmova;
     }
     
     public int getIdFilm() {
@@ -222,8 +231,8 @@ public class Film {
         FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac);
 
     }
-    public String ispisFilmZaKorisnika(String originalniNazivFilma) throws SQLException{
-        this.listaFilmova = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma);
-        return "opisFilm";
+    public String ispisFilmZaKorisnika(String originalniNazivFilma, String nazivFestivalaZaProjekciju) throws SQLException{
+        this.film = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma,nazivFestivalaZaProjekciju);
+        return "opisFilm_1";
     }
 }

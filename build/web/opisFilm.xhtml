@@ -14,12 +14,18 @@
             <div class="row">
                 <div class="col-12">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" value="#{film.listaFilmova}" var="f">
+                        <h:dataTable class="table m-auto" value="#{film.film}" var="f">
                             <h:column>
                                 <f:facet name="header">
                                     Originalni naziv filma:
                                 </f:facet>
                                 #{f.originalniNaziv}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Na festivalu:
+                                </f:facet>
+                                #{f.nazivFestivalaZaDatiFilm}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -73,7 +79,7 @@
                                 <f:facet name="header">
 
                                 </f:facet>
-                                #{f.poster}
+                                <h:graphicImage url="slike/#{f.poster}" height="250px" width="230px"></h:graphicImage>
                             </h:column> 
 
 
