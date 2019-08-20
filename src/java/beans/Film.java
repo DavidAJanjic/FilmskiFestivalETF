@@ -27,7 +27,7 @@ public class Film {
     private String zemljaPorekla;
     private String sviGlumciFilma;
     private String nazivFestivalaZaDatiFilm;
-
+    private int prosecnaOcena;
     private int poslednjiIdFilm;
     private Film film;
 
@@ -75,6 +75,16 @@ public class Film {
         this.idGlumac = idGlumac;
     }
 
+    public int getProsecnaOcena() {
+        return prosecnaOcena;
+    }
+
+    public void setProsecnaOcena(int prosecnaOcena) {
+        this.prosecnaOcena = prosecnaOcena;
+    }
+
+   
+    
     public Film getFilm() {
         return film;
     }
