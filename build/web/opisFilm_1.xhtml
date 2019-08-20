@@ -45,16 +45,13 @@
 
                             IMDB link:
                             <h:commandLink>IMDB</h:commandLink>
+                            
+                            Prosecna ocena:
+                            <h:outputText value="#{film.film.prosecnaOcena}"></h:outputText>
 
                             
 
-<!--                            Broj ulaznica:
-                            <p:inputNumber  decimalPlaces="0" maxlength="3" minValue="1" maxValue="100" value="#{projekcija.brojRezervisanihUlaznicaZaProjekciju}" >
-
-                            </p:inputNumber>
-
-                            Rezervacija:
-                            <h:commandButton  value="Rezervisi"/>-->
+<!--                            />-->
                             </h:panelGrid>
                             
                             <h:graphicImage url="slike/#{film.film.poster}" height="400px"></h:graphicImage>

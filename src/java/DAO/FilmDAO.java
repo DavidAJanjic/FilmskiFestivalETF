@@ -100,6 +100,9 @@ public class FilmDAO {
                 film1.setImdbLink(rs.getString("imdbLink"));
                 film1.setSviGlumciFilma(glumci);
                 film1.setNazivFestivalaZaDatiFilm(nazivFestivalaZaProjekciju);
+                film1.setOcenaCOUNT(rs.getInt("ocenaCount"));
+                film1.setOcenaSUM(rs.getInt("ocenaSUM"));
+                film1.setProsecnaOcena(rs.getInt("ocenaSUM")/rs.getInt("ocenaCount"));
                 
             }
         }

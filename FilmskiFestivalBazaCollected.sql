@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `filmfestival` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `filmfestival` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `filmfestival`;
--- MySQL dump 10.13  Distrib 5.7.24, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: filmfestival
 -- ------------------------------------------------------
--- Server version	5.7.24
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `filmfestival`;
 
 DROP TABLE IF EXISTS `festival`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `festival` (
   `idFestival` int(11) NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) DEFAULT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `festival` (
 
 LOCK TABLES `festival` WRITE;
 /*!40000 ALTER TABLE `festival` DISABLE KEYS */;
-INSERT INTO `festival` VALUES (1,'Exit',3,'2019-05-05','2019-12-07','blablalba',50000),(2,'Jazz',4,'2019-03-03','2019-08-09','blablalba',20000),(3,'Beer Fest',1,'2019-08-15','2019-08-20','blablalba',50000),(4,'Osam',5,'2019-09-01','2019-09-07','blablalba',10000),(5,'Rock Village',2,'2019-08-10','2019-08-10','blablalba',5000),(6,'Kan',1,'2019-09-10','2019-10-21','blablalba',15000);
+INSERT INTO `festival` VALUES (1,'Exit',3,'2019-05-05','2019-12-07','blablalba',50000),(2,'Jazz',4,'2019-03-03','2019-09-09','blablalba',20000),(3,'Beer Fest',1,'2019-08-15','2019-10-20','blablalba',50000),(4,'Osam',5,'2019-09-01','2019-09-07','blablalba',10000),(5,'Rock Village',2,'2019-08-10','2019-08-10','blablalba',5000),(6,'Kan',1,'2019-09-10','2019-10-21','blablalba',15000);
 /*!40000 ALTER TABLE `festival` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +54,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `film`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `film` (
   `idFilm` int(11) NOT NULL AUTO_INCREMENT,
   `originalniNaziv` varchar(45) DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `film` (
   KEY `idZemljePorekla_idx` (`idZemljePorekla`),
   CONSTRAINT `idReziser` FOREIGN KEY (`idReziser`) REFERENCES `reziseri` (`idReziser`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idZemljePorekla` FOREIGN KEY (`idZemljePorekla`) REFERENCES `zemlje_porekla` (`idZemljePorekla`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `film` (
 
 LOCK TABLES `film` WRITE;
 /*!40000 ALTER TABLE `film` DISABLE KEYS */;
-INSERT INTO `film` VALUES (1,'Lord of the Rings','Gospodar Prstenova',2000,'trailer',2,1,250,'https://www.imdb.com/title/tt0120737/','lotrPoster',NULL,NULL),(2,'Star Wars','Ratovi Zvezda',1977,'Sci-Fi',1,2,130,'https://www.imdb.com/title/tt0076759/?ref_=nv_sr_1?ref_=nv_sr_1','stwPoster',NULL,NULL),(3,'Shrek','Srek',2006,'Comedy',3,3,110,'https://www.imdb.com/title/tt0126029/?ref_=nv_sr_1?ref_=nv_sr_1','shrekPoster',NULL,NULL);
+INSERT INTO `film` VALUES (1,'Lord of the Rings','Gospodar Prstenova',2000,'trailer',2,1,250,'https://www.imdb.com/title/tt0120737/','lotrPoster.jpg',59,10),(2,'Star Wars','Ratovi Zvezda',1977,'Sci-Fi',1,2,130,'https://www.imdb.com/title/tt0076759/?ref_=nv_sr_1?ref_=nv_sr_1','stwPoster.jpg',71,10),(3,'Shrek','Srek',2006,'Comedy',3,3,110,'https://www.imdb.com/title/tt0126029/?ref_=nv_sr_1?ref_=nv_sr_1','shrekPoster.jpg',62,10);
 /*!40000 ALTER TABLE `film` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `glumci`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `glumci` (
   `idGlumac` int(11) NOT NULL AUTO_INCREMENT,
   `imeGlumci` varchar(45) DEFAULT NULL,
@@ -116,7 +116,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `korisnik`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `korisnik` (
   `idKorisnik` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE `korisnik` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `idTipKorisnikaKorisnik_idx` (`idTipKorisnika`),
   CONSTRAINT `idTipKorisnikaKorisnik` FOREIGN KEY (`idTipKorisnika`) REFERENCES `tip_korisnika` (`idTipKorisnika`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +141,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES (14,'username','password','ime','prezime','1997-11-23','kontaktMob','email',5,0),(19,'nrte','nerfgd','ntrfdb','ndefb','1997-11-23','65693874','nekaadresatamo@gmail.com',3,0),(20,'eqagbws','sedgbewg','egedsg','esdwbwse','1997-11-23','65693874','nekaadresatamo@gmail.com',2,0),(22,'zdsndeb\\s','egwsegw','wewg','ewg','1997-11-23','65693874','nekaadresatamo@gmail.com',1,0),(23,'awfqwagfqwgqw','wfqwfq','qwfqw','fqwfqw','1997-11-23','0695566888','nekaadresatamo@gmail.com',1,0),(24,'agqagqehbwqg','qgqwgq','gqwgqwg','qgwqwgq','1997-11-23','kontaktbroj','nekaadresatamo@gmail.com',3,0),(25,'ProbaIme','ProvaPass','ImeProba','prezimeproba','1997-11-23','0658877444','nekaadresatamo@gmail.com',1,0),(26,'sdbdbsadba','baabsa','ababa','aba','1997-11-23','nekibroj','nekaadresatamo@gmail.com',1,0),(27,'a','a','afsafasf','asfasf','1997-11-23','0695566888','nekaadresatamo@gmail.com',1,0),(28,'v','vv','qwgqwgq','wgqwqgq','2019-08-13','0695566888','nekaadresatamo@gmail.com',2,0),(29,'p','p2','Petar','Petrovic','2007-01-01','0685544123','peraprea@gmail.com',3,0),(30,'admin','admin','imeprobaNesa','prezimeprobaNesa','2003-02-05','0655898988','adresaadresa@hotmail.com',4,0),(31,'n','n','Nenad','Mitrovic','1989-04-04','+3815566987','mojaAdresa@nekaadresa.com',5,0),(36,'pera111','nn123','nn','nn','2019-08-04','0655588999','nn@gmail.com',1,0),(37,'pera12345','123456','nn','nn','2019-08-04','0658899774','123124@gmail.com',1,0);
+INSERT INTO `korisnik` VALUES (14,'username','password','ime','prezime','1997-11-23','kontaktMob','email',3,0),(19,'nrte','nerfgd','ntrfdb','ndefb','1997-11-23','65693874','nekaadresatamo@gmail.com',3,0),(22,'zdsndeb\\s','egwsegw','wewg','ewg','1997-11-23','65693874','nekaadresatamo@gmail.com',3,0),(23,'awfqwagfqwgqw','wfqwfq','qwfqw','fqwfqw','1997-11-23','0695566888','nekaadresatamo@gmail.com',1,0),(24,'agqagqehbwqg','qgqwgq','gqwgqwg','qgwqwgq','1997-11-23','kontaktbroj','nekaadresatamo@gmail.com',3,0),(25,'ProbaIme','ProvaPass','ImeProba','prezimeproba','1997-11-23','0658877444','nekaadresatamo@gmail.com',1,0),(26,'sdbdbsadba','baabsa','ababa','aba','1997-11-23','nekibroj','nekaadresatamo@gmail.com',1,0),(27,'a','a','afsafasf','asfasf','1997-11-23','0695566888','nekaadresatamo@gmail.com',5,0),(28,'v','v','qwgqwgq','wgqwqgq','2019-08-13','0695566888','nekaadresatamo@gmail.com',2,0),(29,'p','p2','Petar','Petrovic','2007-01-01','0685544123','peraprea@gmail.com',3,0),(30,'admin','admin','imeprobaNesa','prezimeprobaNesa','2003-02-05','0655898988','adresaadresa@hotmail.com',4,0),(31,'n','n','Nenad','Mitrovic','1989-04-04','+3815566987','mojaAdresa@nekaadresa.com',5,0),(36,'pera111','nn123','nn','nn','2019-08-04','0655588999','nn@gmail.com',1,0),(37,'pera12345','123456','nn','nn','2019-08-04','0658899774','123124@gmail.com',1,0),(38,'Piper','chapmanic','Piper','Pieprman','2019-08-21','0622522627','test@test.com',2,0);
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `kupovina`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `kupovina` (
   `idKupovina` int(11) NOT NULL AUTO_INCREMENT,
   `idRezervacija` int(11) DEFAULT NULL,
@@ -178,7 +178,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lokacija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lokacija` (
   `idLokacija` int(11) NOT NULL AUTO_INCREMENT,
   `idMesto` int(11) DEFAULT NULL,
@@ -206,7 +206,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesto` (
   `idMesto` int(11) NOT NULL AUTO_INCREMENT,
   `imeMesto` varchar(45) DEFAULT NULL,
@@ -230,7 +230,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `projekcija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `projekcija` (
   `idProjekcija` int(11) NOT NULL AUTO_INCREMENT,
   `idFestival` int(11) DEFAULT NULL,
@@ -247,7 +247,7 @@ CREATE TABLE `projekcija` (
   CONSTRAINT `idFestivalProjekcija` FOREIGN KEY (`idFestival`) REFERENCES `festival` (`idFestival`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idFilmProjekcija` FOREIGN KEY (`idFilm`) REFERENCES `film` (`idFilm`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idLokacijaProjekcija` FOREIGN KEY (`idLokacija`) REFERENCES `lokacija` (`idLokacija`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +256,7 @@ CREATE TABLE `projekcija` (
 
 LOCK TABLES `projekcija` WRITE;
 /*!40000 ALTER TABLE `projekcija` DISABLE KEYS */;
-INSERT INTO `projekcija` VALUES (3,1,2,250,1,'2019-09-09','20:05:00',100),(4,2,1,320,2,'2019-08-09','19:31:00',2),(5,3,3,100,3,'2019-08-14','14:20:00',40),(6,1,3,300,2,'2019-09-08','18:30:00',200);
+INSERT INTO `projekcija` VALUES (3,1,2,250,1,'2019-09-09','20:05:00',100),(4,2,1,320,2,'2019-08-09','19:31:00',250),(5,3,3,100,3,'2019-08-14','14:20:00',40),(6,1,3,300,2,'2019-09-08','18:30:00',200),(7,4,1,455,3,'2019-09-17','19:30:00',1000),(8,5,2,556,2,'2019-09-09','21:30:00',1200),(9,6,3,785,2,'2019-09-10','22:30:00',1300);
 /*!40000 ALTER TABLE `projekcija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +266,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rezervacija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rezervacija` (
   `idRezervacija` int(11) NOT NULL AUTO_INCREMENT,
   `idProjekcija` int(11) DEFAULT NULL,
@@ -281,7 +281,7 @@ CREATE TABLE `rezervacija` (
   KEY `idP_idx` (`idProjekcija`),
   KEY `idStatusRezervacijeRezervacija_idx` (`idStatusRezervacije`),
   KEY `idKorisnikaRezervacija_idx` (`idKorisnika`),
-  CONSTRAINT `idKorisnikaRezervacija` FOREIGN KEY (`idKorisnika`) REFERENCES `korisnik` (`idKorisnik`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idKorisnikaRezervacija` FOREIGN KEY (`idKorisnika`) REFERENCES `korisnik` (`idKorisnik`),
   CONSTRAINT `idProjekcijaRezervacija` FOREIGN KEY (`idProjekcija`) REFERENCES `projekcija` (`idProjekcija`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idStatusRezervacijeRezervacija` FOREIGN KEY (`idStatusRezervacije`) REFERENCES `status_rezervacija` (`idStatusaRezervacije`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -302,7 +302,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reziseri`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reziseri` (
   `idReziser` int(11) NOT NULL AUTO_INCREMENT,
   `imeReziseri` varchar(45) DEFAULT NULL,
@@ -326,7 +326,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `slike_festivala`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `slike_festivala` (
   `idSlikeFestivala` int(11) NOT NULL AUTO_INCREMENT,
   `idFestivala` int(11) DEFAULT NULL,
@@ -352,7 +352,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `slike_filmova`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `slike_filmova` (
   `idS` int(11) NOT NULL AUTO_INCREMENT,
   `idFilm` int(11) DEFAULT NULL,
@@ -378,7 +378,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `status_rezervacija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status_rezervacija` (
   `idStatusaRezervacije` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) DEFAULT NULL,
@@ -401,7 +401,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tip_korisnika`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tip_korisnika` (
   `idTipKorisnika` int(11) NOT NULL AUTO_INCREMENT,
   `nazivTipa` varchar(45) DEFAULT NULL,
@@ -425,7 +425,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `uloge`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `uloge` (
   `idFilm` int(11) NOT NULL,
   `idGlumac` int(11) NOT NULL,
@@ -443,7 +443,7 @@ CREATE TABLE `uloge` (
 
 LOCK TABLES `uloge` WRITE;
 /*!40000 ALTER TABLE `uloge` DISABLE KEYS */;
-INSERT INTO `uloge` VALUES (1,2),(2,3),(3,1);
+INSERT INTO `uloge` VALUES (1,1),(1,2),(2,3),(3,1);
 /*!40000 ALTER TABLE `uloge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +453,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `zemlje_porekla`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `zemlje_porekla` (
   `idZemljePorekla` int(11) NOT NULL AUTO_INCREMENT,
   `imeZemljaPorekla` varchar(45) DEFAULT NULL,
@@ -480,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-13 12:50:47
+-- Dump completed on 2019-08-20 21:36:52
