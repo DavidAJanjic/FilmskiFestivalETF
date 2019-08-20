@@ -3,6 +3,7 @@ package DAO;
 import beans.Projekcija;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -201,5 +202,30 @@ public class ProjekcijaDAO implements Serializable {
 
             return listaProjekcija;
         }
+    }
+    
+    public static List <Projekcija> ispisNaZahtevKorisnika(String originalniNazivFilmaZaOpisFilma) throws SQLException{
+        List<Projekcija> listaProjekcijaZaOpisFilma = new ArrayList<>();
+        String sql = "select * from festival fe, film fi, projekcija p, lokacija l, mesto m "
+                + "where fe.idMesto = m.idMesto and p.idFestival = fe.idFestival "
+                + "and p.idFilm = fi.idFilm and p.idLokacija = l.idLokacija and originalniNaziv = ?";
+        
+        try(
+                Connection c = DB.otvoriKonekciju();
+                PreparedStatement ps = c.prepareStatement(sql);
+                ){
+            ps.setString(1, originalniNazivFilmaZaOpisFilma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Projekcija p = new Projekcija();
+                p.setNazivFestivalaZaProjekciju(rs.getString("naziv"));
+                p.setDatumProjekcije(rs.getDate("datumProjekcije"));
+                p.setLokacija(rs.getString("imeLokacija"));
+                p.setCena(rs.getInt("cena"));
+                listaProjekcijaZaOpisFilma.add(p);
+            }
+        }
+            
+        return listaProjekcijaZaOpisFilma;
     }
 }

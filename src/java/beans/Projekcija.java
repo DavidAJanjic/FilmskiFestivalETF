@@ -34,6 +34,15 @@ public class Projekcija {
     private String OriginalniNazivFilma;
 
     public List<Projekcija> projekcijeZaIspis;
+    public List<Projekcija> projekcijeZaOpisFilma;
+
+    public List<Projekcija> getProjekicjeZaOpisFilma() {
+        return projekcijeZaOpisFilma;
+    }
+
+    public void setProjekicjeZaOpisFilma(List<Projekcija> projekicjeZaOpisFilma) {
+        this.projekcijeZaOpisFilma = projekicjeZaOpisFilma;
+    }
 
     public String getNazivFilmaNaSrpskom() {
         return NazivFilmaNaSrpskom;
@@ -220,5 +229,9 @@ public class Projekcija {
         return "projekcijeP";
     }
     
+    public void ispisNaZahtevKosinika(String originalniNazivFilmaZaOpisFilma) throws SQLException {
+        this.projekcijeZaOpisFilma = ProjekcijaDAO.ispisNaZahtevKorisnika(originalniNazivFilmaZaOpisFilma);
+        
+    }
     
 }
