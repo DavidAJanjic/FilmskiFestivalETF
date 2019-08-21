@@ -80,6 +80,26 @@ public class FestivalDAO implements Serializable {
         }
         return festival2;
     }
+    
+    public static List<Festival> dohvatiInfoFestivale(String nazivFestivala) throws SQLException {
+        String sql = "select * from festival f, lokacija l, mesto m  where f.idMesto = m.idMesto and l.idMesto = m.idMesto and naziv = ?";
+        List<Festival> festivaliLokacija = new ArrayList<>();
+        try (Connection c = DB.otvoriKonekciju();
+                PreparedStatement ps = c.prepareStatement(sql);) {
+            ps.setString(1, nazivFestivala);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Festival festival = new Festival();
+                festival.setMesto(rs.getString("imeLokacija"));
+                festival.setSala(rs.getString("nazivSale"));
+                festivaliLokacija.add(festival);
+
+            }
+
+        }
+        return festivaliLokacija;
+    }
 
     public static List<Festival> dohvatiFestivaleZaIndex(String naziv, Date datumOd, Date datumDo) throws SQLException {
         String sql = "";

@@ -13,42 +13,31 @@
             <div class="row">
                 <div class="col-12">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" value="#{festival.odabraniFestival}" var="fest">
-                            <h:column>
-                                <f:facet name="header">
-                                    Naziv:
-                                </f:facet>
-                                #{fest.naziv}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Datum od:
-                                </f:facet>
-                                #{fest.datumOd}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Datum do:
-                                </f:facet>
-                                #{fest.datumDo}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Grad:
-                                </f:facet>
-                                #{fest.mesto}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Opis:
-                                </f:facet>
-                                #{fest.opis}
-                            </h:column>        
-                            <h:column>
-                                
+                        <h:panelGrid columns="1">
+                            <h:panelGrid columns="2">
+                                Naziv: 
+                                <h:outputText value="#{festival.odabraniFestival.naziv}"></h:outputText>
+                                Datum od: <h:outputText value="#{festival.odabraniFestival.datumOd}"></h:outputText>
+                                Datum do: <h:outputText value="#{festival.odabraniFestival.datumDo}"></h:outputText>
+                                Grad: <h:outputText value="#{festival.odabraniFestival.mesto}"></h:outputText>
+                                Opis: <h:outputText value="#{festival.odabraniFestival.opis}"></h:outputText>
                                 <h:commandButton action="projekcijeF" value="Program festivala"/>
-                            </h:column>
-                        </h:dataTable>
+                            </h:panelGrid>
+                            <h:dataTable value="#{festival.odabraniFestivali}" var="f" border="1">
+                                <h:column>
+                                    <f:facet name="header">
+                                        Lokacija:
+                                    </f:facet>
+                                    #{f.mesto}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        Naziv sale:
+                                    </f:facet>
+                                    #{f.sala}
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGrid>
                     </h:form>
                 </div>
             </div>

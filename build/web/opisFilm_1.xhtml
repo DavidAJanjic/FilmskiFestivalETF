@@ -44,7 +44,7 @@
                             <h:outputText value="#{film.film.zemljaPorekla}"></h:outputText>
 
                             IMDB link:
-                            <h:commandLink>IMDB</h:commandLink>
+                            <h:outputLink value="#{film.film.imdbLink}">#{film.film.imdbLink}</h:outputLink>
                             
                             Prosecna ocena:
                             <h:outputText value="#{film.film.prosecnaOcena}"></h:outputText>

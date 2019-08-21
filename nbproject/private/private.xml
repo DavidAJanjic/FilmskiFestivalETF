@@ -3,19 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/rezervacijaIzOpisa.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFilm_1.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/src/java/beans/Korisnik.java</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/poseceniFestivali.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/src/java/DAO/FilmDAO.java</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFestival.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/regKorisnik.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/src/java/DAO/KorisnikDAO.java</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/src/java/beans/Film.java</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/login.xhtml</file>
             <file>file:/C:/Users/NPC/Desktop/FF/src/java/beans/Projekcija.java</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/src/java/DAO/ProjekcijaDAO.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/ispisZaRegKorisnika.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/login.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/src/java/DAO/FestivalDAO.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFilm_1.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/ispisZaRegKorisnikaBezOrgNaziva.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/projekcijeF.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFestival.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/index.xhtml</file>
             <file>file:/C:/Users/NPC/Desktop/FF/src/java/beans/Festival.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FF/web/regKorisnik.xhtml</file>
         </group>
     </open-files>
 </project-private>
