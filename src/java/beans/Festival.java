@@ -147,8 +147,8 @@ public class Festival implements Serializable {
 
     }
 
-    public String prikaziDatiFestival(Festival fest) throws SQLException {
-        this.odabraniFestival = FestivalDAO.dohvatiInfoFestival(fest);
+    public String prikaziDatiFestival(String nazivFestivala) throws SQLException {
+        this.odabraniFestival = FestivalDAO.dohvatiInfoFestival(nazivFestivala);
         return "opisFestival";
     }
     

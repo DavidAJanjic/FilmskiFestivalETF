@@ -57,12 +57,12 @@ public class FestivalDAO implements Serializable {
         return festivali;
     }
 
-    public static Festival dohvatiInfoFestival(Festival festival) throws SQLException {
+    public static Festival dohvatiInfoFestival(String nazivFestivala) throws SQLException {
         String sql = "select * from festival f, mesto m where f.idMesto = m.idMesto and naziv = ?";
         Festival festival2 = new Festival();
         try (Connection c = DB.otvoriKonekciju();
                 PreparedStatement ps = c.prepareStatement(sql);) {
-            ps.setString(1, festival.getNaziv());
+            ps.setString(1, nazivFestivala);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

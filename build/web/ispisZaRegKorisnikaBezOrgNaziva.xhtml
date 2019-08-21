@@ -40,6 +40,12 @@
                                 #{pro.lokacija}
                                 </h:column>
                             <h:column>
+                            <f:facet name="header">
+                                Info:
+                            </f:facet>
+                                <h:commandButton action="#{festival.prikaziDatiFestival(pro.nazivFestivalaZaProjekciju)}" value="Info"></h:commandButton>
+                        </h:column>
+                            <h:column>
                                 <f:facet name="header">
                                     Projekcije:
                                 </f:facet>

@@ -54,21 +54,9 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    Cena ulaznice:
-                                </f:facet>
-                                #{p.cena}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Broj ulaznica:
-                                </f:facet>
-                                #{p.maxUlaznicaP}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
                                     
                                 </f:facet>
-                                <h:commandButton value="Rezrvisi" action="#{projekcija.izvrsiRezervaciju(p.idP)}"/>
+                                <h:commandButton value="Rezrvisi" action="rezervisati"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
