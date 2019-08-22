@@ -82,7 +82,7 @@ public class FestivalDAO implements Serializable {
     }
     
     public static List<Festival> dohvatiInfoFestivale(String nazivFestivala) throws SQLException {
-        String sql = "select * from festival f, lokacija l, mesto m  where f.idMesto = m.idMesto and l.idMesto = m.idMesto and naziv = ?";
+        String sql = "select * from festival f, projekcija p, mesto m, lokacija l where f.idFestival = p.idFestival and f.idMesto = m.idMesto and l.idLokacija = p.idLokacija and f.naziv= ?";
         List<Festival> festivaliLokacija = new ArrayList<>();
         try (Connection c = DB.otvoriKonekciju();
                 PreparedStatement ps = c.prepareStatement(sql);) {

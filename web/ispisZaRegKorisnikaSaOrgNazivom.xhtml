@@ -7,9 +7,26 @@
     <h:head>
         <title>Show festival</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-        <link rel="stylesheet" href="css/opisFestival.css"></link>
+        <link rel="stylesheet" href="css/ispisZaRegSaOrgNazivom.css"></link>
     </h:head>
     <h:body>
+        <div class="row header_height header-color">
+            <div class="col-3">
+                <p class="font_color">Logo side</p>
+            </div>
+            <div class="col-6 text-center" >
+                <p class="mt-2 font-weight-bold header_text">
+                    O festivalima:
+                </p>
+            </div>
+            <div class="col-3 text-center pt-3">
+                <h:form>
+
+                    <h:commandLink class="font_color" action="regKorisnik">Nazad</h:commandLink>
+
+                </h:form>
+            </div>
+        </div>
         <div>
             <div class="row">
                 <div class="col-12">
@@ -74,6 +91,13 @@
                         </h:dataTable>
                     </h:form>
                 </div>
+            </div>
+        </div>
+        <div class="row footer_bottom_margin">
+            <div class="col-12 text-center footer_height footer-color">
+                <p class="font-weight-bold footer_text">
+
+                </p>
             </div>
         </div>
     </h:body>

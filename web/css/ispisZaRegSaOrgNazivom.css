@@ -61,7 +61,7 @@ html, body {
 .indexButton{
     margin-top: 1rem;
     background-color: #feda6a;
-    border: 1px solid #feda6a;
+    border: 1px solic #feda6a;
     border-radius: 5px;
     padding: 0.3rem;
     padding-left: 1rem;
@@ -69,7 +69,7 @@ html, body {
 }
 .nopadding{
     padding: 0;
-    height: 100%;
+    height: 100;
     
 }
 .img-carousel{
