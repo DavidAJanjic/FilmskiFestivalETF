@@ -42,7 +42,7 @@
                                 <h:panelGrid columns="3" class="text-center">
                                     <p>Korisnicko ime: </p>
                                     <h:inputText value="#{korisnik.username}" id="username"
-                                                 required="true" requiredMessage="Morate uneti korisnicko ime"/>
+                                                 required="true" requiredMessage="Morate uneti korisnicko ime" autocomplete="off"/>
                                     <p:message for="username" />             
                                     <p>Lozinka:</p>
                                     <h:inputSecret value="#{korisnik.password}" id="password"

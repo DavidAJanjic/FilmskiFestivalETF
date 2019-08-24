@@ -136,9 +136,9 @@ public class ProjekcijaDAO implements Serializable {
     public static List<Projekcija> ispisNaZahtevRegKosinika(String nazivFestivala, String nazivFilma, Date datumOd, Date datumDo) throws SQLException {
         List<Projekcija> listaProjekcija = new ArrayList<>();
         int i = 1;
-        String sql = "select * from projekcija p, festival fe, film fi, lokacija l,"
-                + " mesto m where p.idFestival = fe.idFestival and p.idFilm = fi.idFilm"
-                + " and p.idLokacija = l.idLokacija and l.idMesto = m.idMesto";
+        String sql = "select * from projekcija p, festival fe, film fi, lokacija l, mesto m "
+                + "where p.idFestival = fe.idFestival and p.idFilm = fi.idFilm "
+                + "and p.idLokacija = l.idLokacija and fe.idMesto = m.idMesto";
         if (nazivFestivala.trim().length() != 0) {
             sql += " and fe.naziv = ?";
         }
