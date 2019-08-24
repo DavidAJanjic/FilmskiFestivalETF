@@ -1,30 +1,31 @@
+
 package beans;
 
 import DAO.RezervacijaDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
-public class Rezervacija {
-
+@ManagedBean
+@SessionScoped
+public class Rezervacija implements Serializable {
     private int idRezervacija;
-    private String jedinstveniKod;
-    private int idStatusRezervacije;
+    private String jedinsteveniKod;
+    private String status;
     private Date datumRezervacije;
     private Date datumIsteka;
     private int brojUlaznica;
-    private int cena;
-
     private int idProjekcija;
-    private String ime;
-    private String prezime;
-    private int statusRezIntPromena;
 
-    public Rezervacija(int idRezervacija, String jedinsteveniKod, int idStatusRezervacije, Date datumRezervacije, Date datumIsteka, int brojUlaznica) {
-        this.idRezervacija = idRezervacija;
-        this.jedinstveniKod = jedinstveniKod;
-        this.idStatusRezervacije = idStatusRezervacije;
+    
+    
+    public Rezervacija(int idR, String jedinsteveniKod, String status, Date datumRezervacije, Date datumIsteka, int brojUlaznica) {
+        this.idRezervacija = idR;
+        this.jedinsteveniKod = jedinsteveniKod;
+        this.status = status;
         this.datumRezervacije = datumRezervacije;
         this.datumIsteka = datumIsteka;
         this.brojUlaznica = brojUlaznica;
@@ -33,6 +34,14 @@ public class Rezervacija {
     public Rezervacija() {
     }
 
+    public int getIdProjekcija() {
+        return idProjekcija;
+    }
+
+    public void setIdProjekcija(int idProjekcija) {
+        this.idProjekcija = idProjekcija;
+    }
+    
     public int getIdRezervacija() {
         return idRezervacija;
     }
@@ -41,20 +50,20 @@ public class Rezervacija {
         this.idRezervacija = idRezervacija;
     }
 
-    public String getJedinstveniKod() {
-        return jedinstveniKod;
+    public String getJedinsteveniKod() {
+        return jedinsteveniKod;
     }
 
-    public void setJedinstveniKod(String jedinstveniKod) {
-        this.jedinstveniKod = jedinstveniKod;
+    public void setJedinsteveniKod(String jedinsteveniKod) {
+        this.jedinsteveniKod = jedinsteveniKod;
     }
 
-    public int getIdStatusRezervacije() {
-        return idStatusRezervacije;
+    public String getStatus() {
+        return status;
     }
 
-    public void setIdStatusRezervacije(int idStatusRezervacije) {
-        this.idStatusRezervacije = idStatusRezervacije;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getDatumRezervacije() {
@@ -80,73 +89,10 @@ public class Rezervacija {
     public void setBrojUlaznica(int brojUlaznica) {
         this.brojUlaznica = brojUlaznica;
     }
-
-    public int getIdProjekcija() {
-        return idProjekcija;
-    }
-
-    public void setIdProjekcija(int idProjekcija) {
-        this.idProjekcija = idProjekcija;
-    }
-
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
-    public int getStatusRezIntPromena() {
-        return statusRezIntPromena;
-    }
-
-    public void setStatusRezIntPromena(int statusRezIntPromena) {
-        this.statusRezIntPromena = statusRezIntPromena;
-    }
-
-    public List<Rezervacija> sveRezervacije = new ArrayList<>();
-
-    public List<Rezervacija> getSveRezervacije() {
-        return sveRezervacije;
-    }
-
-    public void setSveRezervacije(List<Rezervacija> sveRezervacije) {
-        this.sveRezervacije = sveRezervacije;
-    }
-
-    public List<Rezervacija> prikaziSveRezervacije() throws SQLException {
-        this.sveRezervacije = RezervacijaDAO.dohvatiSveRezervacije();
-        return sveRezervacije;
-    }
-
-    public int getCena() {
-        return cena;
-    }
-
-    public void setCena(int cena) {
-        this.cena = cena;
-    }
-
-
     
-//        public String dohvatiRezervacijePoImenuIPrezimenu() throws SQLException {
-//
-//        this.sveRezervacije = RezervacijaDAO.dohvatiRezervacijePoKorisniku(ime, prezime);
-//
-//        if (sveRezervacije.isEmpty()) {
-//            return "prodavac";
-//        }
-//        return "prodavac";
-//    }
-
-    
+    public String izvrsiRezervaciju(int idKorisnik, int idProjekcija, int brojUlaznica) throws SQLException {
+        java.sql.Date datumRezervacije1 = java.sql.Date.valueOf(LocalDate.now());
+        RezervacijaDAO.izvrsiRezervaciju(idKorisnik, idProjekcija, "ASDFGHJKLA", 1, datumRezervacije1, brojUlaznica);
+        return "rezervacijaNaCekanju";
+    }
 }

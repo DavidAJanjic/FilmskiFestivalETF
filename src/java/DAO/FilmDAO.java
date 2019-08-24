@@ -66,41 +66,48 @@ public class FilmDAO {
         }
         return false;
     }
-
-    public static List<Film> dohvatiSveFilmove() {
-        List<Film> sviFilmoviLista = new ArrayList<>();
-
-        String sql = "select * from film";
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection = DB.otvoriKonekciju();
-            PreparedStatement ps = connection.prepareStatement(sql);
+    public static Film ispisFilmaZaKorisnika(String originalniNazivFilma,String nazivFestivalaZaProjekciju) throws SQLException{
+        
+        String glumci = "";
+        String sql1 = "select * from film f, uloge u, glumci g "
+                + "where f.idFilm = u.idFilm and u.idGlumac = g.idGlumac and f.originalniNaziv = ?;";
+        try (Connection connection = DB.otvoriKonekciju();
+            PreparedStatement ps = connection.prepareStatement(sql1);){
+            ps.setString(1, originalniNazivFilma);
             ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int idFilm = rs.getInt("idFilm");
-                String originalniNaziv = rs.getString("originalniNaziv");
-                String nazivNaSrpskom = rs.getString("nazivNaSrpskom");
-                
-                Film film = new Film();
-                film.setIdFilm(idFilm);
-                film.setOriginalniNaziv(originalniNaziv);
-                film.setNazivNaSrpskom(nazivNaSrpskom);
-                
-                sviFilmoviLista.add(film);
-
+            while (rs.next()){
+                glumci += rs.getString("imeGlumci") + ",";
             }
-
-            ps.close();
-            connection.close();
-
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(ReziseriDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return sviFilmoviLista;
-    
+        glumci = glumci.substring(0, glumci.length()-1);
+        Film film1 = new Film();
+        String sql = "select * from film f, reziseri r, zemlje_porekla z where f.idReziser = r.idReziser "
+                + "and f.idZemljePorekla = z.idZemljePorekla and f.originalniNaziv = ?";
+        try (Connection connection = DB.otvoriKonekciju();
+            PreparedStatement ps = connection.prepareStatement(sql);){
+            ps.setString(1, originalniNazivFilma);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                //Film film = new Film();
+                film1.setNazivNaSrpskom(rs.getString("nazivNaSrpskom"));
+                film1.setOriginalniNaziv(rs.getString("originalniNaziv"));
+                film1.setPoster(rs.getString("Poster"));
+                film1.setGodinaIzdanja(rs.getInt("godinaIzdanja"));
+                film1.setFilmOpis(rs.getString("filmOpis"));
+                film1.setNazivReziser(rs.getString("imeReziseri"));
+                film1.setTrajanjeFilma(rs.getInt("trajanjeFilma"));
+                film1.setZemljaPorekla(rs.getString("imeZemljaPorekla"));
+                film1.setImdbLink(rs.getString("imdbLink"));
+                film1.setSviGlumciFilma(glumci);
+                film1.setNazivFestivalaZaDatiFilm(nazivFestivalaZaProjekciju);
+                film1.setOcenaCOUNT(rs.getInt("ocenaCount"));
+                film1.setOcenaSUM(rs.getInt("ocenaSUM"));
+                film1.setProsecnaOcena(rs.getInt("ocenaSUM")/rs.getInt("ocenaCount"));
+                
+            }
+        }
+            
+        
+        return film1;
     }
-    
 }

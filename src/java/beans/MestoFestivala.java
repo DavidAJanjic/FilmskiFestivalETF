@@ -2,16 +2,14 @@
 package beans;
 
 import DAO.MestoFestivalaDAO;
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "mestoFestivala")
+@Named(value = "mestoFestivala")
 @javax.faces.bean.SessionScoped
-public class MestoFestivala implements Serializable{
+public class MestoFestivala {
         int idMesto;
         String imeMesto;
         

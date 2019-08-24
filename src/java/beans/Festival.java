@@ -1,23 +1,18 @@
 package beans;
 
 import DAO.FestivalDAO;
-import DAO.LokacijaDAO;
-import DAO.ProjekcijaDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import controller.Controller;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import javax.faces.model.SelectItem;
 import javax.resource.spi.AuthenticationMechanism;
 
-@ManagedBean(name = "festival")
+@ManagedBean
 @javax.faces.bean.SessionScoped
 public class Festival implements Serializable {
 
@@ -29,8 +24,13 @@ public class Festival implements Serializable {
     private int maxUlaznicaF;
     private int idMesto;
     private String mesto;
+    private String opis;
+    private String sala;
 
     private int poslednjiIdFestival;
+    public List<Festival> odabraniFestivalIndex = new ArrayList<>();
+    public Festival odabraniFestival;
+    public List<Festival> odabraniFestivali = new ArrayList<>();
 
     public Festival(int idFestival, String naziv, Date datumOd, Date datumDo, String opis, int maxUlaznica, String mesto) {
         this.idFestival = idFestival;
@@ -42,9 +42,31 @@ public class Festival implements Serializable {
         this.mesto = mesto;
     }
 
-    public List<Festival> odabraniFestivalIndex = new ArrayList<>();
-    public Festival odabraniFestival;
+    public String getSala() {
+        return sala;
+    }
 
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+    
+    public List<Festival> getOdabraniFestivali() {
+        return odabraniFestivali;
+    }
+
+    public void setOdabraniFestivali(List<Festival> odabraniFestivali) {
+        this.odabraniFestivali = odabraniFestivali;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    
     public List<Festival> getOdabraniFestivalIndex() {
         return odabraniFestivalIndex;
     }
@@ -142,41 +164,22 @@ public class Festival implements Serializable {
 
     }
 
-    public String prikaziDatiFestival(Festival fest) throws SQLException {
-        this.odabraniFestival = FestivalDAO.dohvatiInfoFestival(fest);
+    public String prikaziDatiFestival(String nazivFestivala) throws SQLException {
+        this.odabraniFestival = FestivalDAO.dohvatiInfoFestival(nazivFestivala);
         return "opisFestival";
     }
-
+    
+    public void prikaziDatiFestival1(String nazivFestivala) throws SQLException {
+        
+        this.odabraniFestivali = FestivalDAO.dohvatiInfoFestivale(nazivFestivala);
+        
+    }
+    
     public String dohvatiFestivaleZaIndex() throws SQLException {
 
         this.odabraniFestivalIndex = FestivalDAO.dohvatiFestivaleZaIndex(naziv, datumOd, datumDo);
 
-        if (odabraniFestivalIndex.isEmpty()) {
-            return "ispisFestivalaZaNeReg";
-        }
         return "ispisFestivalaZaNeReg";
     }
 
-    public String dodajProjekciju(int idFilm, int cena, int idLokacija, Date datumProjekcije, Date vremeProjekcije, int maxUlaznicaP) throws SQLException {
-        ProjekcijaDAO.dodajProjekciju(poslednjiIdFestival, idFilm, cena, idLokacija, datumProjekcije, vremeProjekcije, maxUlaznicaP);
-        return "dodavanjeProjekcije";
-    }
-
-    public List<Projekcija> sveProjekcije = new ArrayList<>();
-
-    public List<Projekcija> getSveProjekcije() throws SQLException {
-        // return sveProjekcije;
-        return ProjekcijaDAO.listaProjekcijaZaFestival(poslednjiIdFestival);
-    }
-
-    public void setSveProjekcije(List<Projekcija> sveProjekcije) {
-        this.sveProjekcije = sveProjekcije;
-    }
-
-
-    public void init() throws SQLException {
-        if (sveProjekcije == null) {
-            this.sveProjekcije = ProjekcijaDAO.listaProjekcijaZaFestival(poslednjiIdFestival);
-        }
-    }
 }
