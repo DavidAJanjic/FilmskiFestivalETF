@@ -2,13 +2,107 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Seller</title>
         <f:event type="preRenderView" listener="#{korisnik.login()}"></f:event>
     </h:head>
     <h:body>
-        Prodavac
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <h:form>
+                        <p:dataTable var="kor" value="#{korisnik.sveRezervacije()}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     rowsPerPageTemplate="10">
+                            <p:column headerText="Kod rezervacije:">
+                                <h:outputText value="#{kor.jedinstveniKod}" />
+                            </p:column>
+
+                            <p:column headerText="Datum rezervacije:">
+                                <h:outputText value="#{kor.datumRezervacije}" />
+                            </p:column>
+
+                            <p:column headerText="Broj rezervisanih ulaznica:">
+                                <h:outputText value="#{kor.brojUlaznica}" />
+                            </p:column>
+
+                            <p:column headerText="Ime:">
+                                <h:outputText value="#{kor.ime}" />
+                            </p:column>
+
+                            <p:column headerText="Prezime:">
+                                <h:outputText value="#{kor.prezime}" />
+                            </p:column>
+
+                            <p:column headerText="Status rezervacije">
+                                <h:outputText value="#{kor.idStatusRezervacije}" />
+                            </p:column>
+
+                            <p:column headerText="Status rezervacije:">
+                                <h:selectOneMenu value="#{kor.statusRezIntPromena}">
+                                    <f:selectItem itemValue = "1" itemLabel = "Neodredjeno" /> 
+                                    <f:selectItem itemValue = "2" itemLabel = "Rezervisano" /> 
+                                    <f:selectItem itemValue = "3" itemLabel = "Odbijeno" /> 
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Potvrdi promenu statusa rezervacije:">
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <p:commandButton value="Odobri rezervaciju" type="button" onclick="PF('dlg2').show();" />
+                                
+                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                                    <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." />
+                                <br/>
+                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(korisnik.idRezervacija, korisnik.statusRezIntPromena, korisnik.jedinstveniKod )}" value="Potvrdi"/>
+                            </p:dialog>   
+                            </p:column>
+
+                            
+
+
+                            <f:facet name="paginatorTopLeft">
+                                <p:commandButton type="button" icon="pi pi-refresh" />
+                            </f:facet>
+
+                            <f:facet name="paginatorBottomRight">
+                                <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                            </f:facet>
+
+                        </p:dataTable>
+                    </h:form>
+
+                    <br/>
+
+                    <h:form class="form m-auto">
+                        <h:panelGrid columns="1" class="m-auto">
+                            <p>Pretraga rezervacija:</p>
+                            <hr/>
+                            <h:panelGrid columns="2">
+                                <h:form>
+                                    <p>Ime korisnika:</p>
+                                    <h:inputText value="#{korisnik.ime}"  autocomplete="off"></h:inputText>
+
+                                    <br/>
+
+                                    <p>Prezime korisnika:</p>
+                                    <h:inputText value="#{korisnik.prezime}"  autocomplete="off"></h:inputText>
+
+
+                                </h:form>
+                            </h:panelGrid>
+                            <h:commandButton value="Pretrazi" action="#{korisnik.dohvatiRezervacijePoNazivu()}" class="indexButton"></h:commandButton>
+                        </h:panelGrid>
+                    </h:form>
+
+
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>
 

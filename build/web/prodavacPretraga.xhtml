@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <h:form>
-                        <p:dataTable var="kor" value="#{korisnik.sveRezervacije()}" rows="10"
+                        <p:dataTable var="kor" value="#{korisnik.rezervacijePoNazivu}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                      rowsPerPageTemplate="10">
@@ -105,4 +105,3 @@
         </div>
     </h:body>
 </html>
-

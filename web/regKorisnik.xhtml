@@ -26,7 +26,7 @@
                 <div class="col-3 text-center pt-3">
                     <h:form>
                         <h:commandLink class="mr-3 font_color" action="rezervacija">Rezervacije</h:commandLink>
-                        <h:commandLink class="font_color" action="poseceniFestivali">Poseceni Festivali</h:commandLink>
+                        <h:commandLink class="font_color" action="registracija">Poseceni Festivali</h:commandLink>
                         <h:commandLink class="ml-3 font_color" action="#{korisnik.logOut()}">LogOut</h:commandLink>
                     </h:form>
                 </div>
@@ -34,7 +34,7 @@
             <div class="row row1">
                 <div class="col-8 nopadding">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" style="color: white" value="#{controller.sviFestivali()}" var="fest">
+                    <h:dataTable class="table m-auto" style="color: white" value="#{controller.sviFestivali()}" var="fest">
                        
                         <h:column>
                             <f:facet name="header">
@@ -64,7 +64,7 @@
                             <f:facet name="header">
                                 Info:
                             </f:facet>
-                            <h:commandButton action="#{festival.prikaziDatiFestival(fest.naziv)}" value="Info" actionListener="#{festival.prikaziDatiFestival1(fest.naziv)}"></h:commandButton>
+                            <h:commandButton action="#{festival.prikaziDatiFestival(fest)}" value="Info"></h:commandButton>
                         </h:column>
                        
                     </h:dataTable>
@@ -75,19 +75,20 @@
                         <h:panelGrid columns="1" class="m-auto">
                             <p>Pretraga festivala:</p>
                             <hr/>
+
                             <h:panelGrid columns="2">
                                 <h:form>
                                     <p>Naziv festivala:</p>
-                                    <h:inputText value="#{projekcija.nazivFestivalaZaProjekciju}" autocomplete="off"></h:inputText>
+                                    <h:inputText value="#{projekcija.nazivFestivalaZaProjekciju}"></h:inputText>
                                     <p>Originalni naziv filma <br/> ili naziv filma na srpskom:</p>
-                                    <h:inputText value="#{projekcija.nazivFilmaNaSrpskomIliStraniNazivFilma}" autocomplete="off"></h:inputText>
+                                    <h:inputText value="#{projekcija.nazivFilmaNaSrpskomIliStraniNazivFilma}"></h:inputText>
                                     <p>Datum od:</p>
                                     <p:calendar mode="popup" value="#{projekcija.festivaldatumOd}" 
-                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy" autocomplete="off">
+                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy">
                                     </p:calendar>
                                     <p class="mt-2">Datum do:</p>
                                     <p:calendar mode="popup" value="#{projekcija.festivaldatumDo}" 
-                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy" autocomplete="off">
+                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy">
                                     </p:calendar>
                                 </h:form>
                             </h:panelGrid>
