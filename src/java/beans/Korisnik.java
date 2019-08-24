@@ -84,7 +84,9 @@ public class Korisnik implements Serializable {
     }
 
     List<Korisnik> sviKorisnici = new ArrayList<>();
-
+    
+    
+    
     public Korisnik() {
     }
 
@@ -124,6 +126,8 @@ public class Korisnik implements Serializable {
         this.brojPrekrsaja = brojPrekrsaja;
     }
 
+    
+    
     public int getIdKorisnik() {
         return idKorisnik;
     }
@@ -248,6 +252,7 @@ public class Korisnik implements Serializable {
 
     public String login() {
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
+        idKorisnik = k.idKorisnik;
         msgLogIn = null;
         if (k != null) {
             if (k.getTipKorisnikaInt() == 1) {

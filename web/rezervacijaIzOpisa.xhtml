@@ -5,9 +5,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Rezervacija iz opisa</title>
     </h:head>
     <h:body>
+        <h:form>
         <h:dataTable value="#{projekcija.projekicjeZaOpisFilma}" var="p">
             <h:column>
                 <f:facet name="header">
@@ -39,9 +40,10 @@
             <h:column>
 
                 <f:facet name="header">Rezervacija:</f:facet>
-                <h:commandButton  value="Rezervisi"></h:commandButton>
+                <h:commandButton action="#{rezervacija.izvrsiRezervaciju(korisnik.idKorisnik, p.idP, projekcija.brojRezervisanihUlaznicaZaProjekciju)}" value="RezervisiIzOpisa"></h:commandButton>
             </h:column>
         </h:dataTable>
+        </h:form>
 </h:body>
 </html>
 

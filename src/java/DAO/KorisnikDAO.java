@@ -83,8 +83,11 @@ public class KorisnikDAO {
                 Date datumRodjenja = rs.getDate("datumRodjenja");
                 String kontaktMob = rs.getString("kontaktMob");
                 int tipKorisnika = rs.getInt("idTipKorisnika");
+                int idKorisnik = rs.getInt("idKorisnik");
+                
 
                 Korisnik korisnik = new Korisnik();
+                korisnik.setIdKorisnik(idKorisnik);
                 korisnik.setUsername(username);
                 korisnik.setPassword(password);
                 korisnik.setIme(ime);

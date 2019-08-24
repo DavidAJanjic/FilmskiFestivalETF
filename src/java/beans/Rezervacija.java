@@ -1,19 +1,29 @@
 
 package beans;
 
+import DAO.RezervacijaDAO;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
-
-public class Rezervacija {
-    private int idR;
-    private int jedinsteveniKod;
+@ManagedBean
+@SessionScoped
+public class Rezervacija implements Serializable {
+    private int idRezervacija;
+    private String jedinsteveniKod;
     private String status;
     private Date datumRezervacije;
     private Date datumIsteka;
     private int brojUlaznica;
+    private int idProjekcija;
 
-    public Rezervacija(int idR, int jedinsteveniKod, String status, Date datumRezervacije, Date datumIsteka, int brojUlaznica) {
-        this.idR = idR;
+    
+    
+    public Rezervacija(int idR, String jedinsteveniKod, String status, Date datumRezervacije, Date datumIsteka, int brojUlaznica) {
+        this.idRezervacija = idR;
         this.jedinsteveniKod = jedinsteveniKod;
         this.status = status;
         this.datumRezervacije = datumRezervacije;
@@ -24,19 +34,27 @@ public class Rezervacija {
     public Rezervacija() {
     }
 
-    public int getIdR() {
-        return idR;
+    public int getIdProjekcija() {
+        return idProjekcija;
     }
 
-    public void setIdR(int idR) {
-        this.idR = idR;
+    public void setIdProjekcija(int idProjekcija) {
+        this.idProjekcija = idProjekcija;
+    }
+    
+    public int getIdRezervacija() {
+        return idRezervacija;
     }
 
-    public int getJedinsteveniKod() {
+    public void setIdRezervacija(int idRezervacija) {
+        this.idRezervacija = idRezervacija;
+    }
+
+    public String getJedinsteveniKod() {
         return jedinsteveniKod;
     }
 
-    public void setJedinsteveniKod(int jedinsteveniKod) {
+    public void setJedinsteveniKod(String jedinsteveniKod) {
         this.jedinsteveniKod = jedinsteveniKod;
     }
 
@@ -72,5 +90,9 @@ public class Rezervacija {
         this.brojUlaznica = brojUlaznica;
     }
     
-    
+    public String izvrsiRezervaciju(int idKorisnik, int idProjekcija, int brojUlaznica) throws SQLException {
+        java.sql.Date datumRezervacije1 = java.sql.Date.valueOf(LocalDate.now());
+        RezervacijaDAO.izvrsiRezervaciju(idKorisnik, idProjekcija, "ASDFGHJKLA", 1, datumRezervacije1, brojUlaznica);
+        return "rezervacijaNaCekanju";
+    }
 }

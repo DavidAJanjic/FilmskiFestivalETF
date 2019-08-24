@@ -222,6 +222,7 @@ public class ProjekcijaDAO implements Serializable {
                 p.setDatumProjekcije(rs.getDate("datumProjekcije"));
                 p.setLokacija(rs.getString("imeLokacija"));
                 p.setCena(rs.getInt("cena"));
+                p.setIdP(rs.getInt("idProjekcija"));
                 listaProjekcijaZaOpisFilma.add(p);
             }
         }
