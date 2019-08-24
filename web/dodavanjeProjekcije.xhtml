@@ -6,6 +6,8 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
+                <f:event type="preRenderView" listener="#{festival.init()}"></f:event>
+                <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
     </h:head>
     <h:body>
         <div class="container">
@@ -27,10 +29,16 @@
 
                         <h:panelGrid columns="2">
 
-                            Bioskop: 
-                            <h:selectOneMenu value="#{lokacija.imeLokacija}">
+                            Bioskop i sala: 
+                            <h:selectOneMenu value="#{projekcija.idLokacija}">
                                 <f:selectItem itemLabel="Izaberite bioskop" itemValue=""/>
-                                <f:selectItems value="#{lokacija.dohvatiLokacije()}"></f:selectItems>
+                                <f:selectItems value="#{projekcija.dohvatiIdLokacijeZaProjekciju(festival.idMesto)}"></f:selectItems>
+                            </h:selectOneMenu>
+
+                            Film:
+                            <h:selectOneMenu value="#{projekcija.idFilm}">
+                                <f:selectItem itemLabel="Izaberite film" itemValue=""/>
+                                <f:selectItems value="#{film.dodajFilmZaProjekciju()}"></f:selectItems>
                             </h:selectOneMenu>
 
 
@@ -42,23 +50,83 @@
 
                             Vreme projekcije:
                             <p:calendar mode="popup" value="#{projekcija.vremeProjekcije}" 
-                                        navigator="true" required="true" >
+                                        timeOnly="true" pattern="HH:mm" required="true" >
 
                             </p:calendar>
 
-
-                            Maksimalan broj karata za projekciju
+                            Cena karte:
+                            <h:inputText value="#{projekcija.cena}">
+                                <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="4" />                         
+                            </h:inputText> 
+                            
+                            Maksimalan broj karata za projekciju:
                             <h:inputText value="#{projekcija.maxUlaznicaP}">
                                 <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="4" />                         
                             </h:inputText> 
 
-                            <h:commandButton action="#{projekcijaDAO.dodajProjekciju(festival.idFestival, film.idFilm,
-                                                       projekcija.cena, lokacija.idLokacija, projekcija.datumProjekcije,
+                            <h:commandButton action="#{festival.dodajProjekciju(projekcija.idFilm,
+                                                       projekcija.cena, projekcija.idLokacija, projekcija.datumProjekcije,
                                                        projekcija.vremeProjekcije, projekcija.maxUlaznicaP)}" value="Dodaj novu projekciju"/>
 
                             <h:commandButton action="#{korisnik.nazad()}" value="Nazad" immediate="true"/>
 
                         </h:panelGrid>
+
+                        <br/>
+
+                        <!--ISPIS DODATIH PROJEKCIJA ZA FESTIVAL-->
+
+                        <h3>Sve projekcije</h3>
+
+
+                        <h:dataTable class="table" value="#{festival.sveProjekcije}"
+                                     var="projekcija">
+                            <h:column>
+                                <f:facet name="header" >
+                                    Bioskop:
+                                </f:facet>
+                                #{projekcija.imeLokacija}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    Sala:
+                                </f:facet>
+                                #{projekcija.nazivSale}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    Film:
+                                </f:facet>
+                                #{projekcija.originalniNazivFilma}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    Datum Projekcije:
+                                </f:facet>
+                                #{projekcija.datumProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    Vreme Projekcije:
+                                </f:facet>
+                                #{projekcija.vremeProjekcije}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    Cena:
+                                </f:facet>
+                                #{projekcija.cena}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    Maksimalan broj ulaznica:
+                                </f:facet>
+                                #{projekcija.maxUlaznicaP}
+                            </h:column>
+                        </h:dataTable>
+
+                        <br/>
+
 
                     </h:form>
                 </div>
@@ -66,3 +134,4 @@
         </div>
     </h:body>
 </html>
+

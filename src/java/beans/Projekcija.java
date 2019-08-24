@@ -1,18 +1,22 @@
 
 package beans;
 
+import DAO.LokacijaDAO;
 import DAO.ProjekcijaDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.SelectItem;
 
-@ManagedBean
+@ManagedBean (name = "projekcija")
 @SessionScoped
 
-public class Projekcija {
+public class Projekcija implements Serializable{
     private int idP;
     private int cena;
     private String lokacija;
@@ -25,53 +29,22 @@ public class Projekcija {
     private Date FestivaldatumOd;
     private Date FestivaldatumDo;
     List<Projekcija> IspisRegKorisnika;
-    private Time vremeProjekcije;
+    private Date vremeProjekcije;
     private String nazivSale;
     private int brojRezervisanihUlaznicaZaProjekciju;
     private int maxUlaznicaP;
+    
+    private int idFilm;
+    private String originalniNazivFilma;
+    private String nazivFilmaNaSrpskom; 
+    
     private int idLokacija;
-    private String NazivFilmaNaSrpskom;
-    private String OriginalniNazivFilma;
-
-    public List<Projekcija> projekcijeZaIspis;
-    public List<Projekcija> projekcijeZaOpisFilma;
-
-    public List<Projekcija> getProjekicjeZaOpisFilma() {
-        return projekcijeZaOpisFilma;
-    }
-
-    public void setProjekicjeZaOpisFilma(List<Projekcija> projekicjeZaOpisFilma) {
-        this.projekcijeZaOpisFilma = projekicjeZaOpisFilma;
-    }
-
-    public String getNazivFilmaNaSrpskom() {
-        return NazivFilmaNaSrpskom;
-    }
-
-    public void setNazivFilmaNaSrpskom(String NazivFilmaNaSrpskom) {
-        this.NazivFilmaNaSrpskom = NazivFilmaNaSrpskom;
-    }
-
-    public String getOriginalniNazivFilma() {
-        return OriginalniNazivFilma;
-    }
-
-    public void setOriginalniNazivFilma(String OriginalniNazivFilma) {
-        this.OriginalniNazivFilma = OriginalniNazivFilma;
-    }
-
+    private String imeLokacija;
     
-   
-
-    public List<Projekcija> getProjekcijeZaIspis() {
-        return projekcijeZaIspis;
-    }
-
-    public void setProjekcijeZaIspis(List<Projekcija> projekcijeZaIspis) {
-        this.projekcijeZaIspis = projekcijeZaIspis;
-    }
+    private String ImeLokacijaNazivSale;
     
-    
+    private int idMesto;
+
     public int getBrojRezervisanihUlaznicaZaProjekciju() {
         return brojRezervisanihUlaznicaZaProjekciju;
     }
@@ -91,11 +64,11 @@ public class Projekcija {
 
     
     
-    public Time getVremeProjekcije() {
+    public Date getVremeProjekcije() {
         return vremeProjekcije;
     }
 
-    public void setVremeProjekcije(Time vremeProjekcije) {
+    public void setVremeProjekcije(Date vremeProjekcije) {
         this.vremeProjekcije = vremeProjekcije;
     }
 
@@ -189,6 +162,7 @@ public class Projekcija {
 
     public void setLokacija(String lokacija) {
         this.lokacija = lokacija;
+        this.imeLokacija = lokacija;
     }
 
     public String getSala() {
@@ -197,6 +171,7 @@ public class Projekcija {
 
     public void setSala(String sala) {
         this.sala = sala;
+        this.nazivSale = sala;
     }
 
     public int getMaxUlaznicaP() {
@@ -215,23 +190,64 @@ public class Projekcija {
         this.idLokacija = idLokacija;
     }
 
-    
+    public String getImeLokacija() {
+        return imeLokacija;
+    }
+
+    public void setImeLokacija(String imeLokacija) {
+        this.imeLokacija = imeLokacija;
+    }
+
+    public String getImeLokacijaNazivSale() {
+        return ImeLokacijaNazivSale;
+    }
+
+    public void setImeLokacijaNazivSale(String ImeLokacijaNazivSale) {
+        this.ImeLokacijaNazivSale = ImeLokacijaNazivSale;
+    }
+
+    public int getIdMesto() {
+        return idMesto;
+    }
+
+    public void setIdMesto(int idMesto) {
+        this.idMesto = idMesto;
+    }
+
+    public int getIdFilm() {
+        return idFilm;
+    }
+
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
+    }
+
+    public String getOriginalniNazivFilma() {
+        return originalniNazivFilma;
+    }
+
+    public void setOriginalniNazivFilma(String originalniNazivFilma) {
+        this.originalniNazivFilma = originalniNazivFilma;
+    }
+
+    public String getNazivFilmaNaSrpskom() {
+        return nazivFilmaNaSrpskom;
+    }
+
+    public void setNazivFilmaNaSrpskom(String nazivFilmaNaSrpskom) {
+        this.nazivFilmaNaSrpskom = nazivFilmaNaSrpskom;
+    }
+
     public String ispisNaZahtevRegKosinika() throws SQLException{
         
         this.IspisRegKorisnika = ProjekcijaDAO.ispisNaZahtevRegKosinika(nazivFestivalaZaProjekciju,nazivFilmaNaSrpskomIliStraniNazivFilma,FestivaldatumOd,FestivaldatumDo);
-        if ((nazivFilmaNaSrpskomIliStraniNazivFilma.trim().length() != 0)) {
-            return "ispisZaRegKorisnikaSaOrgNazivom";
-        }
-        return "ispisZaRegKorisnikaBezOrgNaziva";
-    }
-    public String ispisProjekcija(String nazivFestivalaZaProjekciju) throws SQLException{
-        this.projekcijeZaIspis = ProjekcijaDAO.listaProjekcija1(nazivFestivalaZaProjekciju);
-        return "projekcijeP";
+        
+        return "ispisZaRegKorisnika";
     }
     
-    public void ispisNaZahtevKosinika(String originalniNazivFilmaZaOpisFilma) throws SQLException {
-        this.projekcijeZaOpisFilma = ProjekcijaDAO.ispisNaZahtevKorisnika(originalniNazivFilmaZaOpisFilma);
-        
+        public List<SelectItem> dohvatiIdLokacijeZaProjekciju(int idMesto) {
+        return LokacijaDAO.dohvatiLokacijeZaProjekcije(idMesto).stream().map(x -> new SelectItem(x.getIdLokacija(), x.getImeLokacijaNazivSale())).collect(Collectors.toList());
     }
+
     
 }

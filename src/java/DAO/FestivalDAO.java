@@ -57,12 +57,12 @@ public class FestivalDAO implements Serializable {
         return festivali;
     }
 
-    public static Festival dohvatiInfoFestival(String nazivFestivala) throws SQLException {
+    public static Festival dohvatiInfoFestival(Festival festival) throws SQLException {
         String sql = "select * from festival f, mesto m where f.idMesto = m.idMesto and naziv = ?";
         Festival festival2 = new Festival();
         try (Connection c = DB.otvoriKonekciju();
                 PreparedStatement ps = c.prepareStatement(sql);) {
-            ps.setString(1, nazivFestivala);
+            ps.setString(1, festival.getNaziv());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -73,32 +73,11 @@ public class FestivalDAO implements Serializable {
                 festival2.setFestivalOpis(rs.getString("festivalOpis"));
                 festival2.setMaxUlaznicaF(rs.getInt("maxUlaznicaF"));
                 festival2.setMesto(rs.getString("imeMesto"));
-                festival2.setOpis(rs.getString("festivalOpis"));
 
             }
 
         }
         return festival2;
-    }
-    
-    public static List<Festival> dohvatiInfoFestivale(String nazivFestivala) throws SQLException {
-        String sql = "select * from festival f, projekcija p, mesto m, lokacija l where f.idFestival = p.idFestival and f.idMesto = m.idMesto and l.idLokacija = p.idLokacija and f.naziv= ?";
-        List<Festival> festivaliLokacija = new ArrayList<>();
-        try (Connection c = DB.otvoriKonekciju();
-                PreparedStatement ps = c.prepareStatement(sql);) {
-            ps.setString(1, nazivFestivala);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Festival festival = new Festival();
-                festival.setMesto(rs.getString("imeLokacija"));
-                festival.setSala(rs.getString("nazivSale"));
-                festivaliLokacija.add(festival);
-
-            }
-
-        }
-        return festivaliLokacija;
     }
 
     public static List<Festival> dohvatiFestivaleZaIndex(String naziv, Date datumOd, Date datumDo) throws SQLException {
@@ -265,7 +244,7 @@ public class FestivalDAO implements Serializable {
 
         String festivalSql = "insert into festival(naziv, idMesto, datumOd, datumDo, fesitvalOpis, maxUlaznicaF) values(?, ?, ?, ?, ?, ?)";
 
-        int poslednjiIdFilm = -1;
+        int poslednjiIdFestival = -1;
                 
         try {
             Connection connection = DB.otvoriKonekciju();
@@ -282,7 +261,7 @@ public class FestivalDAO implements Serializable {
             
             ResultSet rsId = ps.getGeneratedKeys();
             if (rsId.next()){
-                poslednjiIdFilm = rsId.getInt(1);
+                poslednjiIdFestival = rsId.getInt(1);
                 
             }
 
@@ -293,6 +272,6 @@ public class FestivalDAO implements Serializable {
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return poslednjiIdFilm;
+        return poslednjiIdFestival;
     }
 }
