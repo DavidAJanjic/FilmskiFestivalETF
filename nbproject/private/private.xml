@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/registracija.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/projekcijeF.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/changingPassword.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/opisFilm_1.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/beans/Film.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/beans/Korisnik.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/DAO/KorisnikDAO.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/controller/Controller.java</file>
+        </group>
     </open-files>
 </project-private>

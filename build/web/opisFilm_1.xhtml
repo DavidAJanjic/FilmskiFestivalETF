@@ -71,7 +71,7 @@
 <!--                            />-->
                             </h:panelGrid>
                             
-                            <h:graphicImage url="slike/#{film.film.poster}" height="400px"></h:graphicImage>
+                            <h:graphicImage url="#{film.film.poster}" height="400px"></h:graphicImage>
                             <h:dataTable value="#{projekcija.projekicjeZaOpisFilma}" var="p">
                                 <h:column>
                                 <f:facet name="header">
