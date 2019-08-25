@@ -2,6 +2,7 @@ package beans;
 
 import DAO.FilmDAO;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "film")
 @SessionScoped
-public class Film implements Serializable{
+public class Film implements Serializable {
 
     private int idFilm;
     private String originalniNaziv;
@@ -18,6 +19,7 @@ public class Film implements Serializable{
     private int godinaIzdanja;
     private String filmOpis;
     private int idReziser;
+    private String nazivReziser;
     private int idZemljePorekla;
     private int trajanjeFilma;
     private String imdbLink;
@@ -25,8 +27,12 @@ public class Film implements Serializable{
     private int ocenaSUM;
     private int ocenaCOUNT;
     private int idGlumac;
-
+    private String zemljaPorekla;
+    private String sviGlumciFilma;
+    private String nazivFestivalaZaDatiFilm;
+    private int prosecnaOcena;
     private int poslednjiIdFilm;
+    private Film film;
 
     public Film() {
     }
@@ -70,6 +76,54 @@ public class Film implements Serializable{
         this.imdbLink = imdbLink;
         this.poster = poster;
         this.idGlumac = idGlumac;
+    }
+
+    public int getProsecnaOcena() {
+        return prosecnaOcena;
+    }
+
+    public void setProsecnaOcena(int prosecnaOcena) {
+        this.prosecnaOcena = prosecnaOcena;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public String getNazivFestivalaZaDatiFilm() {
+        return nazivFestivalaZaDatiFilm;
+    }
+
+    public void setNazivFestivalaZaDatiFilm(String nazivFestivalaZaDatiFilm) {
+        this.nazivFestivalaZaDatiFilm = nazivFestivalaZaDatiFilm;
+    }
+
+    public String getSviGlumciFilma() {
+        return sviGlumciFilma;
+    }
+
+    public void setSviGlumciFilma(String sviGlumciFilma) {
+        this.sviGlumciFilma = sviGlumciFilma;
+    }
+
+    public String getZemljaPorekla() {
+        return zemljaPorekla;
+    }
+
+    public void setZemljaPorekla(String zemljaPorekla) {
+        this.zemljaPorekla = zemljaPorekla;
+    }
+
+    public String getNazivReziser() {
+        return nazivReziser;
+    }
+
+    public void setNazivReziser(String nazivReziser) {
+        this.nazivReziser = nazivReziser;
     }
 
     public int getIdFilm() {
@@ -188,9 +242,14 @@ public class Film implements Serializable{
         FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac);
 
     }
+
+    public String ispisFilmZaKorisnika(String originalniNazivFilma, String nazivFestivalaZaProjekciju) throws SQLException {
+        this.film = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma, nazivFestivalaZaProjekciju);
+        return "opisFilm_1";
+    }
+
     public List<SelectItem> dodajFilmZaProjekciju() {
         return FilmDAO.dohvatiSveFilmove().stream().map(x -> new SelectItem(x.getIdFilm(), x.getOriginalniNaziv())).collect(Collectors.toList());
-
 
     }
 }

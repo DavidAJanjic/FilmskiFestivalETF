@@ -68,10 +68,11 @@ public class Lokacija {
     public void setImeLokacijaNazivSale(String imeLokacijaNazivSale) {
         this.imeLokacijaNazivSale = imeLokacijaNazivSale;
     }
-
     
 
-    
-    
+    public List<SelectItem> dohvatiLokacije() {
+        return LokacijaDAO.dohvatiSveLokacije().stream().map(x -> new SelectItem(x.getIdLokacija(), x.getImeLokacija())).collect(Collectors.toList());
+
+    }
 
 }

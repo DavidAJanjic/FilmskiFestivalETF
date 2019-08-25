@@ -11,7 +11,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "mestoFestivala")
 @javax.faces.bean.SessionScoped
-public class MestoFestivala implements Serializable{
+public class MestoFestivala implements Serializable {
         int idMesto;
         String imeMesto;
         

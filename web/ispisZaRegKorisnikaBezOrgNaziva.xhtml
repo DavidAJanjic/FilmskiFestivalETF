@@ -21,9 +21,7 @@
             </div>
             <div class="col-3 text-center pt-3">
                 <h:form>
-
                     <h:commandLink class="font_color" action="regKorisnik">Nazad</h:commandLink>
-
                 </h:form>
             </div>
         </div>
@@ -56,15 +54,15 @@
                                 </f:facet>
                                 #{pro.nazivMestaZaProjekciju}
                                 #{pro.lokacija}
-                                </h:column>
+                            </h:column>
                             <h:column>
-                            <f:facet name="header">
-                                Info:
-                            </f:facet>
+                                <f:facet name="header">
+                                    Info:
+                                </f:facet>
                                 <h:commandButton action="#{festival.prikaziDatiFestival(pro.nazivFestivalaZaProjekciju)}" value="Info" actionListener="#{festival.prikaziDatiFestival1(pro.nazivFestivalaZaProjekciju)}">
-                                
+
                                 </h:commandButton>
-                        </h:column>
+                            </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     Projekcije:

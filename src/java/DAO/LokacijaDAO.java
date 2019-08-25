@@ -2,7 +2,6 @@ package DAO;
 
 import beans.Lokacija;
 import beans.MestoFestivala;
-import beans.Projekcija;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +14,10 @@ import util.DB;
 
 public class LokacijaDAO {
 
-    public static List<String> dohvatiSveLokacije() {
-        List<String> sveLokacije = new ArrayList<>();
+    public static List<Lokacija> dohvatiSveLokacije() {
+        List<Lokacija> sveLokacije = new ArrayList<>();
 
-        String sql = "select imeLokacija from lokacija";
+        String sql = "select * from lokacija";
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -27,10 +26,18 @@ public class LokacijaDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+                int idLokacija = rs.getInt("idLokacija");
+                int idMesto = rs.getInt("idMesto");
                 String imeLokacija = rs.getString("imeLokacija");
-                
-                sveLokacije.add(imeLokacija);
+                String nazivSale = rs.getString("nazivSale");
+
+                Lokacija lokacija = new Lokacija();
+                lokacija.setIdLokacija(idLokacija);
+                lokacija.setIdMesto(idMesto);
+                lokacija.setImeLokacija(imeLokacija);
+                lokacija.setNazivSale(nazivSale);
+
+                sveLokacije.add(lokacija);
 
             }
 
@@ -44,8 +51,7 @@ public class LokacijaDAO {
         return sveLokacije;
     }
 
-    
-    //vraca sve lokacije na strani za dodavanje projekcija, a kao argument uzima idMesto dobijeno kod kreiranja festivala!
+        //vraca sve lokacije na strani za dodavanje projekcija, a kao argument uzima idMesto dobijeno kod kreiranja festivala!
         public static List<Lokacija> dohvatiLokacijeZaProjekcije(int idMesto) {
         List<Lokacija> sveLokacije = new ArrayList<>();
 
@@ -119,7 +125,6 @@ public class LokacijaDAO {
 
         return ispis;
     }
-
 }
 
 

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "korisnik")
@@ -86,7 +85,9 @@ public class Korisnik implements Serializable {
     }
 
     List<Korisnik> sviKorisnici = new ArrayList<>();
-
+    
+    
+    
     public Korisnik() {
     }
 
@@ -126,6 +127,8 @@ public class Korisnik implements Serializable {
         this.brojPrekrsaja = brojPrekrsaja;
     }
 
+    
+    
     public int getIdKorisnik() {
         return idKorisnik;
     }
@@ -250,6 +253,7 @@ public class Korisnik implements Serializable {
 
     public String login() {
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
+        idKorisnik = k.idKorisnik;
         msgLogIn = null;
         if (k != null) {
             if (k.getTipKorisnikaInt() == 1) {
@@ -264,7 +268,7 @@ public class Korisnik implements Serializable {
                 return "banovan";
             }
         }
-        msgLogIn = "Uneti podatci nisu isprani! Molimo pokusajte ponovo!";
+        msgLogIn = "Uneti podatci nisu ispravni! Molimo pokusajte ponovo!";
         return "login";
     }
 
@@ -294,8 +298,10 @@ public class Korisnik implements Serializable {
         KorisnikDAO.odbaciZahtev(username, password);
         return "admin";
     }
-
-    // kod za pregled svih postojecih rezervacija
+    
+    
+    
+        // kod za pregled svih postojecih rezervacija
     private int idRezervacija;
     private String jedinstveniKod;
     private int idStatusRezervacije;
@@ -306,7 +312,7 @@ public class Korisnik implements Serializable {
     private int statusRezIntPromena;
     private int cena;
     
-    private List rezervacijeIspis
+    private List rezervacijeIspis;
 
     public int getIdRezervacija() {
         return idRezervacija;
@@ -386,8 +392,7 @@ public class Korisnik implements Serializable {
     
     
 
-    public String promeniStatusRezervacije(int idRezervacija, int statusRezIntPromena, String jedinstveniKod) {
-        
+    public String promeniStatusRezervacije(int idRezervacija, int statusRezIntPromena, String jedinstveniKod) throws SQLException {
         RezervacijaDAO.setStatusRezervacije(idRezervacija, statusRezIntPromena, jedinstveniKod);
         return "prodavac";
     }
@@ -409,9 +414,7 @@ public class Korisnik implements Serializable {
     public void setRezervacijePoNazivu(List<Rezervacija> rezervacijePoNazivu) {
         this.rezervacijePoNazivu = rezervacijePoNazivu;
     }
-    
-    
-    
+
     public String dohvatiRezervacijePoNazivu() throws SQLException {
         rezervacijePoNazivu = RezervacijaDAO.dohvatiRezervacijePoImenuIPrezimenu(ime, prezime);
         return "prodavacPretraga";
