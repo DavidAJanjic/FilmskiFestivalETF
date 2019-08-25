@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/projekcijeF.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFestival.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/beans/Festival.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/beans/Rezervacija.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/beans/Korisnik.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/login.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/web/rezervacijaIzOpisa.xhtml</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/DAO/KorisnikDAO.java</file>
+            <file>file:/C:/Users/NPC/Desktop/FilmskiFestival/src/java/DAO/FestivalDAO.java</file>
         </group>
     </open-files>
 </project-private>

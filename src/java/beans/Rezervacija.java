@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Random;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -89,10 +90,36 @@ public class Rezervacija implements Serializable {
     public void setBrojUlaznica(int brojUlaznica) {
         this.brojUlaznica = brojUlaznica;
     }
+    String msgZaBrojKarataRezervacije;
+
+    public String getMsgZaBrojKarataRezervacije() {
+        return msgZaBrojKarataRezervacije;
+    }
+
+    public void setMsgZaBrojKarataRezervacije(String msgZaBrojKarataRezervacije) {
+        this.msgZaBrojKarataRezervacije = msgZaBrojKarataRezervacije;
+    }
     
     public String izvrsiRezervaciju(int idKorisnik, int idProjekcija, int brojUlaznica) throws SQLException {
+        msgZaBrojKarataRezervacije = null;
+        
+        if(brojUlaznica <= 0 || brojUlaznica >=100){
+        
+            msgZaBrojKarataRezervacije = "Broj ulaznica mora biti minimalno 1, a maksimalno 100";
+            return "rezervacijaIzOpisa";
+        }
         java.sql.Date datumRezervacije1 = java.sql.Date.valueOf(LocalDate.now());
-        RezervacijaDAO.izvrsiRezervaciju(idKorisnik, idProjekcija, "ASDFGHJKLA", 1, datumRezervacije1, brojUlaznica);
+        
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();        
+        
+        RezervacijaDAO.izvrsiRezervaciju(idKorisnik, idProjekcija, saltStr, 1, datumRezervacije1, brojUlaznica);
         return "rezervacijaNaCekanju";
     }
 }

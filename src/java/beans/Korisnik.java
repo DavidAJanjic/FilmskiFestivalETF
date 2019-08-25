@@ -267,7 +267,7 @@ public class Korisnik implements Serializable {
                 return "banovan";
             }
         }
-        msgLogIn = "Uneti podatci nisu isprani! Molimo pokusajte ponovo!";
+        msgLogIn = "Uneti podatci nisu ispravni! Molimo pokusajte ponovo!";
         return "login";
     }
 
