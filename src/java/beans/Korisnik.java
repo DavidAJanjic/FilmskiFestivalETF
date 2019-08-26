@@ -1,6 +1,7 @@
 package beans;
 
 import DAO.KorisnikDAO;
+import DAO.KupovinaDAO;
 import DAO.RezervacijaDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -253,7 +254,7 @@ public class Korisnik implements Serializable {
 
     public String login() {
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
-        idKorisnik = k.idKorisnik;
+        idKorisnik = k.getIdKorisnik();
         msgLogIn = null;
         if (k != null) {
             if (k.getTipKorisnikaInt() == 1) {
@@ -388,6 +389,18 @@ public class Korisnik implements Serializable {
 
     public List<Rezervacija> sveRezervacije() throws SQLException {
         return RezervacijaDAO.dohvatiSveRezervacije();
+    }
+    
+    public List<Rezervacija> sveRezervacijeZaKorisnika() throws SQLException {
+        return RezervacijaDAO.dohvatiRezervacijePoIdKorisnika(idKorisnik);
+    }
+    
+    public String izvrsiKupovinu(int idRezervacije) throws SQLException {
+        return KupovinaDAO.izvrsiKupovinu(idRezervacije);
+    }
+    
+    public String obrisiKupovinu(int idRezervacije) throws SQLException {
+        return KupovinaDAO.otkaziRezervaciju(idRezervacije);
     }
     
     

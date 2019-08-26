@@ -218,4 +218,44 @@ public class RezervacijaDAO {
         return rezervacijeIspis;
     }
     
+    
+    public static List<Rezervacija> dohvatiRezervacijePoIdKorisnika(int idKorisnika) throws SQLException {
+        List<Rezervacija> rezervacije = new ArrayList<>();
+        String sql = "select r.idRezervacija, r.idProjekcija, r.jedinstveniKod,"
+                + " r.idStatusRezervacije, r.datumRezervacije, r.datumIsteka, f.nazivNaSrpskom, "
+                + "r.brojUlaznica, p.cena, l.imeLokacija, l.nazivSale, status_rezervacija.status "
+                + "from rezervacija r, lokacija l, projekcija p, status_rezervacija, film f"
+                +" WHERE r.idKorisnika = ? and p.idProjekcija = r.idProjekcija and l.idLokacija = p.idLokacija"
+                + " and status_rezervacija.idStatusRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm;";
+        
+
+            try (
+                    Connection c = DB.otvoriKonekciju();
+                    PreparedStatement ps = c.prepareStatement(sql);) 
+            {
+                ps.setInt(1, idKorisnika);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    
+                    Rezervacija rezervacija = new Rezervacija();
+                rezervacija.setIdRezervacija(rs.getInt("idRezervacija"));
+                rezervacija.setIdProjekcija(rs.getInt("idProjekcija"));
+                rezervacija.setJedinstveniKod(rs.getString("jedinstveniKod"));
+                rezervacija.setIdStatusRezervacije(rs.getInt("idStatusRezervacije"));
+                rezervacija.setDatumRezervacije(rs.getDate("datumRezervacije"));
+                rezervacija.setDatumIsteka(rs.getDate("datumIsteka"));
+                rezervacija.setBrojUlaznica(rs.getInt("brojUlaznica"));
+                rezervacija.setImeLokacije(rs.getString("imeLokacija"));
+                rezervacija.setImeSale(rs.getString("nazivSale"));
+                rezervacija.setCena(rs.getInt("cena"));
+                rezervacija.setStatusRezervacijeString(rs.getString("status"));
+                rezervacija.setNazivFilma(rs.getString("nazivNaSrpskom"));
+
+                rezervacije.add(rezervacija);
+                }
+                return rezervacije;
+            }
+            
+    }
 }

@@ -22,13 +22,16 @@ public class Rezervacija implements Serializable {
     private Date datumIsteka;
     private int brojUlaznica;
     private int idProjekcija;
-
+    
     private int cena;
-
+    private String nazivFilma;
+    private String imeLokacije;
+    private String imeSale;
     private String ime;
     private String prezime;
     private int statusRezIntPromena;
     private int idStatusRezervacije;
+    private String statusRezervacijeString;
     
     
     public Rezervacija(int idR, String jedinsteveniKod, String status, Date datumRezervacije, Date datumIsteka, int brojUlaznica) {
@@ -43,6 +46,40 @@ public class Rezervacija implements Serializable {
     public Rezervacija() {
     }
 
+    public String getNazivFilma() {
+        return nazivFilma;
+    }
+
+    public void setNazivFilma(String nazivFilma) {
+        this.nazivFilma = nazivFilma;
+    }
+    
+    public String getStatusRezervacijeString() {
+        return statusRezervacijeString;
+    }
+
+    public void setStatusRezervacijeString(String statusRezervacijeString) {
+        this.statusRezervacijeString = statusRezervacijeString;
+    }
+    
+    public String getImeLokacije() {
+        return imeLokacije;
+    }
+
+    public void setImeLokacije(String imeLokacije) {
+        this.imeLokacije = imeLokacije;
+    }
+
+    public String getImeSale() {
+        return imeSale;
+    }
+
+    public void setImeSale(String imeSale) {
+        this.imeSale = imeSale;
+    }
+    
+    
+    
     public int getIdProjekcija() {
         return idProjekcija;
     }
