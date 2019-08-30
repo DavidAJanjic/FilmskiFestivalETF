@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "film")
 @SessionScoped
@@ -36,7 +38,15 @@ public class Film implements Serializable {
 
     public Film() {
     }
-
+    
+    public void onLoad() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
+        String nazivFilma = request.getParameter("naziv_filma");
+        String nazivFestivalaZaProjekciju = request.getParameter("naziv_festivala_za_projekciju");
+        
+    }
+    
     public Film(int idFilm, String originalniNaziv, String nazivNaSrpskom, int godIzdanja, String filmOpis, int idReziser, int idZemljePorekla, int trajanjeFilma, String imdbLink, String poster) {
         this.idFilm = idFilm;
         this.originalniNaziv = originalniNaziv;

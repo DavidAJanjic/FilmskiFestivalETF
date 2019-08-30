@@ -237,24 +237,25 @@ public class Korisnik implements Serializable {
         return "filmTemp";
     }
 
-    public String loginKorisnik() {
-        loginKorisnik = KorisnikDAO.dohvatiKorisnika(username, password);
-        if (loginKorisnik.getTipKorisnikaInt() == 2) {
-            return "regKorisnik";
-        } else if (loginKorisnik.getTipKorisnikaInt() == 3) {
-            return "prodavac";
-        } else if (loginKorisnik.getTipKorisnikaInt() == 4) {
-            return "admin";
-        } else if (loginKorisnik.getTipKorisnikaInt() == 5) {
-            return "banovan";
-        } else {
-            return "neRegKorisnik";
-        }
-    }
+//    public String loginKorisnik() {
+//        loginKorisnik = KorisnikDAO.dohvatiKorisnika(username, password);
+//        if (loginKorisnik.getTipKorisnikaInt() == 2) {
+//            return "regKorisnik";
+//        } else if (loginKorisnik.getTipKorisnikaInt() == 3) {
+//            return "prodavac";
+//        } else if (loginKorisnik.getTipKorisnikaInt() == 4) {
+//            return "admin";
+//        } else if (loginKorisnik.getTipKorisnikaInt() == 5) {
+//            return "banovan";
+//        } else {
+//            return "neRegKorisnik";
+//        }
+//    }
 
     public String login() {
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
         idKorisnik = k.getIdKorisnik();
+        ime = k.getIme();
         msgLogIn = null;
         if (k != null) {
             if (k.getTipKorisnikaInt() == 1) {
@@ -391,8 +392,16 @@ public class Korisnik implements Serializable {
         return RezervacijaDAO.dohvatiSveRezervacije();
     }
     
-    public List<Rezervacija> sveRezervacijeZaKorisnika() throws SQLException {
-        return RezervacijaDAO.dohvatiRezervacijePoIdKorisnika(idKorisnik);
+    public List<Rezervacija> sveRezervacijeZaKorisnika1() throws SQLException {
+        return RezervacijaDAO.dohvatiRezervacijePoIdKorisnika1(idKorisnik);
+    }
+    
+    public List<Rezervacija> sveRezervacijeZaKorisnika2() throws SQLException {
+        return RezervacijaDAO.dohvatiRezervacijePoIdKorisnika2(idKorisnik);
+    }
+    
+    public List<Rezervacija> sveRezervacijeZaKorisnika3() throws SQLException {
+        return RezervacijaDAO.dohvatiRezervacijePoIdKorisnika3(idKorisnik);
     }
     
     public String izvrsiKupovinu(int idRezervacije) throws SQLException {

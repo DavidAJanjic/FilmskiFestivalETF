@@ -31,14 +31,11 @@
             <div class="row row1">
                 <div class="col-10 nopadding">
                     <h:form class="form m-auto">
-                        <h:dataTable class="table m-auto" style="color: white" value="#{korisnik.sveRezervacijeZaKorisnika()}" var="rez">
+                        <h:panelGrid columns="1">
+                            
+                        <h:dataTable class="table m-auto text-center" style="color: white" value="#{korisnik.sveRezervacijeZaKorisnika1()}" var="rez"
+                                     columnClasses="col1,col2,col3,col4,col5,col6,col7">
                        
-                        <h:column>
-                            <f:facet name="header">
-                                Id:
-                            </f:facet>
-                            #{rez.idRezervacija}
-                        </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Film
@@ -84,6 +81,80 @@
                         </h:column>
                        
                     </h:dataTable>
+                            <br/>
+                            <br/>
+                        <h:dataTable class="table m-auto text-center" style="color: red" value="#{korisnik.sveRezervacijeZaKorisnika2()}" var="rez"
+                                     columnClasses="col1,col2,col3,col4,col5,col6,col7">
+                       
+                        <h:column>
+                            
+                            #{rez.nazivFilma}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.imeLokacije}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.imeSale}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.brojUlaznica}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.cena}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.statusRezervacijeString}
+                        </h:column>    
+                        <h:column>
+                            
+                            <h:commandButton action="#{korisnik.izvrsiKupovinu(rez.idRezervacija)}" class="bg-primary" value="Kupi"/>
+                            <h:commandButton action="#{korisnik.obrisiKupovinu(rez.idRezervacija)}" class="bg-danger" value="Otkazi rezervaciju"/>
+                        </h:column>
+                       
+                    </h:dataTable>
+                            
+                            <br/>
+                            <br/>
+                        <h:dataTable class="table m-auto text-center" style="color: lightskyblue" value="#{korisnik.sveRezervacijeZaKorisnika3()}" var="rez"
+                                     columnClasses="col1,col2,col3,col4,col5,col6,col7">
+                       
+                        <h:column>
+                            
+                            #{rez.nazivFilma}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.imeLokacije}
+                        </h:column>
+                        <h:column >
+                            
+                            #{rez.imeSale}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.brojUlaznica}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.cena}
+                        </h:column>
+                        <h:column>
+                            
+                            #{rez.statusRezervacijeString}
+                        </h:column>    
+                        <h:column>
+                            
+                            <h:commandButton action="#{korisnik.izvrsiKupovinu(rez.idRezervacija)}" class="bg-primary" value="Kupi"/>
+                            <h:commandButton action="#{korisnik.obrisiKupovinu(rez.idRezervacija)}" class="bg-danger" value="Otkazi rezervaciju"/>
+                        </h:column>
+                       
+                    </h:dataTable>
+                        </h:panelGrid>
                     </h:form>
                 </div>
             </div>
