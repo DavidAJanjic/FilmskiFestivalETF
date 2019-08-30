@@ -1,113 +1,225 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
+
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+
       xmlns:p="http://primefaces.org/ui"
+
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
+
         <title>Facelet Title</title>
+
     </h:head>
+
     <h:body>
+
         <div class="full_page bg-dark">
+
             <div class="row header_height">
+
                 <div class="col-6 text-center bg-secondary" >
+
                     <p class="mt-2 font-weight-bold font-italic header_text">
+
                         Dodavanje filma
+
                     </p>
+
                 </div>
+
             </div>
+
             <div class="row bg-dark">
+
                 <h:panelGrid columns="2">
 
+
+
                 <div class="col-6  text-center">
+
                     <h:form>
+
                         
+
                         Originalni naziv filma
+
                         <h:inputText value="#{film.originalniNaziv}">
 
+
+
                         </h:inputText>
+
                         
+
                         <br/>
+
                         
+
                         Naziv filma na srpskom
+
                         <h:inputText value="#{film.nazivNaSrpskom}">
 
+
+
                         </h:inputText>
+
                         
+
                         <br/>
+
                         
+
                         Godina izdanja
+
                         <h:inputText value="#{film.godinaIzdanja}">
+
                             <f:validateRegex pattern="^\d{4}$"/>
+
                         </h:inputText>
+
                         
+
                         <br/>
+
                         
+
                         Opis filma
+
                         <h:inputTextarea value="#{film.filmOpis}">
 
+
+
                         </h:inputTextarea>
+
                         
+
                         <br/>
+
                         
+
                         Reziser
+
                         <h:selectOneMenu value="#{reziseriController.idReziser}">
+
                             <f:selectItem itemLabel="Izaberite rezisera" itemValue=""/>
+
                             <f:selectItems value="#{reziseriController.dohvatiRezisere()}"></f:selectItems>
+
                         </h:selectOneMenu>
+
                         
+
                         <br/>
+
                         
+
                         Zemlja porekla
+
                         <h:selectOneMenu value="#{zemljePoreklaController.idZemljePorekla}">
+
                             <f:selectItem itemLabel="Izaberite zemlju porekla" itemValue=""/>
+
                             <f:selectItems value="#{zemljePoreklaController.pregledListeZemalja()}"></f:selectItems>
+
                         </h:selectOneMenu>
+
                         
+
                         <br/>
+
                         
+
                         Uloge:
+
                         
+
                         <h:selectOneMenu value="#{glumciController.idGlumac}">
+
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
+
                             <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+
                         </h:selectOneMenu>
+
                         <h:selectOneMenu value="#{glumciController.idGlumac}">
+
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
+
                             <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+
                         </h:selectOneMenu>
+
                         <h:selectOneMenu value="#{glumciController.idGlumac}">
+
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
+
                             <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+
                         </h:selectOneMenu>
+
                         <br/>
+
                         
+
                         Trajanje filma
+
                         <h:inputText value="#{film.trajanjeFilma}">
+
                             <f:validateRegex pattern="^\d{4}$"/>
+
                         </h:inputText>
+
                         
+
                         <br/>
+
                         
+
                         Imdb link
+
                         <h:inputText value="#{film.imdbLink}">
 
-                        </h:inputText>
-                        <br/>
-                        
-                        Poster
-                        <h:inputText value="#{film.poster}">
+
 
                         </h:inputText>
-                        
+
                         <br/>
+
+                        
+
+                        Poster
+
+                        <h:inputText value="#{film.poster}">
+
+
+
+                        </h:inputText>
+
+                        
+
+                        <br/>
+
                         <h:commandButton value="SUBMIT" action="#{filmController.dodajFilm()}"></h:commandButton>
+
                         <h:commandButton action="#{korisnikController.nazad()}" value="Nazad" immediate="true"/>
+
                     </h:form> 
+
                 </div>
+
                     </h:panelGrid>
+
             </div>
+
             
+
         </div>
+
     </h:body>
+
 </html>

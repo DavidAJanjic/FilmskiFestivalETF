@@ -53,12 +53,13 @@
                                 <f:facet name="header">
 
                                 </f:facet>
+                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(kor.idRezervacija, korisnik.statusRezIntPromena, korisnik.jedinstveniKod )}" value="Potvrdi"/>
                                 <p:commandButton value="Odobri rezervaciju" type="button" onclick="PF('dlg2').show();" />
                                 
                                 <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                                     <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." />
                                 <br/>
-                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(korisnik.idRezervacija, korisnik.statusRezIntPromena, korisnik.jedinstveniKod )}" value="Potvrdi"/>
+                                
                             </p:dialog>   
                             </p:column>
 
