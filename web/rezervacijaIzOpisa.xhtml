@@ -4,44 +4,78 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    <link rel="stylesheet" href="css/rezervacijaIzOpisa.css"></link>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+
     <h:head>
-        <title>Facelet Title</title>
+        <title>Rezervacija iz opisa</title>
     </h:head>
     <h:body>
-        <h:dataTable value="#{projekcija.projekicjeZaOpisFilma}" var="p">
-            <h:column>
-                <f:facet name="header">
-                    Naziv festivala:
-                </f:facet>
-                #{p.nazivFestivalaZaProjekciju}
-            </h:column><h:column>
-                <f:facet name="header">
-                    Datum projekcije:
-                </f:facet>
-                #{p.datumProjekcije}
-            </h:column><h:column>
-                <f:facet name="header">
-                    Mesto projekcije:
-                </f:facet>
-                #{p.lokacija}
-            </h:column><h:column>
-                <f:facet name="header">
-                    Cena ulaznice:
-                </f:facet>
-                #{p.cena}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Broj ulaznica:</f:facet>
-                <p:inputNumber decimalPlaces="0" maxlength="3" minValue="1" maxValue="100" value="#{projekcija.brojRezervisanihUlaznicaZaProjekciju}" >
+        <div class="row header_height header-color">
+            <div class="col-3">
+                <p class="font_color">Logo side</p>
+            </div>
+            <div class="col-6 text-center" >
+                <p class="mt-2 font-weight-bold header_text">
+                    Rezervisi:
+                </p>
+            </div>
+            <div class="col-3 text-center pt-3">
+                <h:form>
+                    <h:commandLink class="font_color" action="regKorisnik">Nazad</h:commandLink>
+                </h:form>
+            </div>
+        </div>
+        <h:form>
+            <h:panelGrid columns="1" class="text-center" rendered="#{rezervacija.msgZaBrojKarataRezervacije!=null}">
+                <div class="alert alert-warning alert-dismissible" >
+                    <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+                    #{rezervacija.msgZaBrojKarataRezervacije}
+                </div>
+            </h:panelGrid>
+            <h:dataTable value="#{projekcija.projekicjeZaOpisFilma}" var="p">
+                <h:column>
+                    <f:facet name="header">
+                        Naziv festivala:
+                    </f:facet>
+                    #{p.nazivFestivalaZaProjekciju}
+                </h:column><h:column>
+                    <f:facet name="header">
+                        Datum projekcije:
+                    </f:facet>
+                    #{p.datumProjekcije}
+                </h:column><h:column>
+                    <f:facet name="header">
+                        Mesto projekcije:
+                    </f:facet>
+                    #{p.lokacija}
+                </h:column><h:column>
+                    <f:facet name="header">
+                        Cena ulaznice:
+                    </f:facet>
+                    #{p.cena}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Broj ulaznica:</f:facet>
+                    <p:inputNumber decimalPlaces="0" maxlength="3" minValue="0" maxValue="100" value="#{p.brojRezervisanihUlaznicaZaProjekciju}" >
 
-                </p:inputNumber>
-            </h:column>
-            <h:column>
+                    </p:inputNumber>
+                </h:column>
 
-                <f:facet name="header">Rezervacija:</f:facet>
-                <h:commandButton  value="Rezervisi"></h:commandButton>
-            </h:column>
-        </h:dataTable>
-</h:body>
+                <h:column>
+
+                    <f:facet name="header">Rezervacija:</f:facet>
+                    <h:commandButton action="#{rezervacija.izvrsiRezervaciju(korisnik.idKorisnik, p.idP, p.brojRezervisanihUlaznicaZaProjekciju)}" value="RezervisiIzOpisa"></h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <div class="row footer_bottom_margin">
+            <div class="col-12 text-center footer_height footer-color">
+                <p class="font-weight-bold footer_text">
+
+                </p>
+            </div>
+        </div>
+    </h:body>
 </html>
 

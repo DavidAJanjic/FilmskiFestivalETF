@@ -25,11 +25,8 @@ public class ProjekcijaDAO implements Serializable {
     public ProjekcijaDAO() {
     }
 
-    public int dodajProjekciju(int idFestival, int idFilm, int cena, int idLokacija, Date datumProjekcije, Time vremeProjekcije, int maxUlaznicaP) throws SQLException {
-
+    public static void dodajProjekciju(int idFestival, int idFilm, int cena, int idLokacija, Date datumProjekcije, Date vremeProjekcije, int maxUlaznicaP) throws SQLException {
         String festivalSql = "insert into projekcija(idFestival, idFilm, cena, idLokacija, datumProjekcije, vremeProjekcije, maxUlaznicaP) values(?, ?, ?, ?, ?, ?, ?)";
-
-        int poslednjiIdFilm = -1;
 
         try (
             Connection connection = DB.otvoriKonekciju();
@@ -40,28 +37,25 @@ public class ProjekcijaDAO implements Serializable {
             ps.setInt(3, cena);
             ps.setInt(4, idLokacija);
             ps.setString(5, (new SimpleDateFormat("yyyy-MM-dd")).format(datumProjekcije));
-            ps.setTime(6, new java.sql.Time(vremeProjekcije.getTime()));
+            ps.setString(6, (new SimpleDateFormat("HH:mm")).format(vremeProjekcije));
             ps.setInt(7, maxUlaznicaP);
 
             ps.executeUpdate();
-
-            ResultSet rsId = ps.getGeneratedKeys();
-            if (rsId.next()) {
-                poslednjiIdFilm = rsId.getInt(1);
-
-            }
-
             ps.close();
-
             connection.close();
 
         } 
-        return poslednjiIdFilm;
+        
     }
+    
     public static List<Projekcija> listaProjekcija(int idFestivala) throws SQLException {
         List<Projekcija> projekcije = new ArrayList<>();
-        
-        String sql = "select projekcija.cena, projekcija.datumProjekcije,projekcija.vremeProjekcije,projekcija.idProjekcija, projekcija.maxUlaznicaP,lokacija.imeLokacija,lokacija.nazivSale,film.nazivNaSrpskom,film.originalniNaziv, festival.naziv from projekcija,film,lokacija, festival where projekcija.idFestival = ? and projekcija.idFilm = film.idFilm and projekcija.idLokacija = lokacija.idLokacija and projekcija.idFestival = festival.idFestival;";
+        String sql = "select p.cena, p.datumProjekcije, p.vremeProjekcije,"
+                + "p.idProjekcija, p.maxUlaznicaP, l.imeLokacija, l.nazivSale,"
+                + "f.nazivNaSrpskom, f.originalniNaziv, fe.naziv "
+                + "from projekcija p, film f, lokacija l, festival fe "
+                + "where p.idFestival = ? and p.idFilm = f.idFilm and p.idLokacija = l.idLokacija "
+                + "and p.idFestival = f.idFestival;";
 
         try (
                 Connection c = DB.otvoriKonekciju();
@@ -222,10 +216,41 @@ public class ProjekcijaDAO implements Serializable {
                 p.setDatumProjekcije(rs.getDate("datumProjekcije"));
                 p.setLokacija(rs.getString("imeLokacija"));
                 p.setCena(rs.getInt("cena"));
+                p.setIdP(rs.getInt("idProjekcija"));
                 listaProjekcijaZaOpisFilma.add(p);
             }
         }
             
         return listaProjekcijaZaOpisFilma;
+    }
+    
+    public static List<Projekcija> listaProjekcijaZaFestival(int idFestival) throws SQLException {
+        List<Projekcija> projekcije = new ArrayList<>();
+        String sql = "SELECT p.cena, p.datumProjekcije, p.vremeProjekcije,"
+                + "p.maxUlaznicaP, l.imeLokacija, l.nazivSale, f.nazivNaSrpskom, f.originalniNaziv "
+                + "from projekcija p JOIN film f JOIN lokacija l JOIN festival fe "
+                + "where p.idFestival = ? and p.idFilm = f.idFilm and p.idLokacija = l.idLokacija and fe.idFestival = p.idFestival";
+
+        try (
+                Connection c = DB.otvoriKonekciju();
+                PreparedStatement ps = c.prepareStatement(sql);) {
+            ps.setInt(1, idFestival);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Projekcija projekcija = new Projekcija();
+                projekcija.setNazivFilmaNaSrpskom(rs.getString("nazivNaSrpskom"));
+                projekcija.setOriginalniNazivFilma(rs.getString("originalniNaziv"));
+                projekcija.setImeLokacija(rs.getString("imeLokacija"));
+                projekcija.setNazivSale(rs.getString("nazivSale"));
+                projekcija.setDatumProjekcije(rs.getDate("datumProjekcije"));
+                projekcija.setCena(rs.getInt("cena"));
+                projekcija.setMaxUlaznicaP(rs.getInt("maxUlaznicaP"));
+                projekcija.setVremeProjekcije(rs.getTime("vremeProjekcije"));
+
+                projekcije.add(projekcija);
+            }
+        }
+        return projekcije;
     }
 }

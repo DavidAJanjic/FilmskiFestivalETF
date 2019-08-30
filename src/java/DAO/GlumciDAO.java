@@ -36,12 +36,9 @@ public class GlumciDAO {
   
             }
 
-
             ps.close();
             connection.close();
             
-            
-
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(GlumciDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,14 +6,18 @@
 package beans;
 
 import DAO.ReziseriDAO;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
-@Named(value = "reziseri")
-public class Reziseri {
+@ManagedBean(name = "reziseri")
+@SessionScoped
+public class Reziseri implements Serializable{
     int idReziser;
     String imeReziser;
     
@@ -55,8 +59,7 @@ public class Reziseri {
         // metoda za vracanje svih rezisera za SelectOneMenu
     public List<SelectItem> dohvatiRezisere() {
         return ReziseriDAO.dohvatiSveRezisere().stream().map(x -> new SelectItem(x.getIdReziser(), x.getImeReziser())).collect(Collectors.toList());
-
-
     }
+
   
 }

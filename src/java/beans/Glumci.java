@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
-@Named(value = "glumci")
+@ManagedBean(name = "glumci")
+@SessionScoped
 public class Glumci implements Serializable{
     int idGlumac;
     String imeGlumac;

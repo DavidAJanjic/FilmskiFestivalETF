@@ -3,8 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/projekcijeF.xhtml</file>
-            <file>file:/C:/Users/NPC/Desktop/FF/web/opisFestival.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/beans/Film.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/DAO/RezervacijaDAO.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/beans/Korisnik.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/ispisFestivalaZaNeReg.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/beans/Rezervacija.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/filmTemp.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/ispisZaRegKorisnikaSaOrgNazivom.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/opisFilm_1.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/DAO/FilmDAO.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/festivalKreiranje.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/login.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/dodavanjeProjekcije.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/src/java/beans/Kupovina.java</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/ispisZaRegKorisnikaBezOrgNaziva.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/registracija.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/prodavac.xhtml</file>
+            <file>file:/C:/Users/predavac/Downloads/FilmskiFestival-develop%20190829/FilmskiFestival-develop/FilmskiFestival-develop/web/ispisZaRegKorisnika.xhtml</file>
         </group>
     </open-files>
 </project-private>

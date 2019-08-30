@@ -76,7 +76,6 @@ public class FestivalDAO implements Serializable {
                 festival2.setOpis(rs.getString("festivalOpis"));
 
             }
-
         }
         return festival2;
     }
@@ -96,7 +95,6 @@ public class FestivalDAO implements Serializable {
                 festivaliLokacija.add(festival);
 
             }
-
         }
         return festivaliLokacija;
     }
@@ -263,9 +261,9 @@ public class FestivalDAO implements Serializable {
         public static int dodajFestival(String naziv, int idMesto,
             Date datumOd, Date datumDo, String festivalOpis, int maxUlaznicaF) {
 
-        String festivalSql = "insert into festival(naziv, idMesto, datumOd, datumDo, fesitvalOpis, maxUlaznicaF) values(?, ?, ?, ?, ?, ?)";
+        String festivalSql = "insert into festival(naziv, idMesto, datumOd, datumDo, festivalOpis, maxUlaznicaF) values(?, ?, ?, ?, ?, ?)";
 
-        int poslednjiIdFilm = -1;
+        int poslednjiIdFestival = -1;
                 
         try {
             Connection connection = DB.otvoriKonekciju();
@@ -273,8 +271,8 @@ public class FestivalDAO implements Serializable {
 
             ps.setString(1, naziv);
             ps.setInt(2, idMesto);
-            ps.setDate(3, new java.sql.Date(datumOd.getTime()));
-            ps.setDate(4, new java.sql.Date(datumDo.getTime()));
+            ps.setString(3, (new SimpleDateFormat("yyyy-MM-dd")).format(datumOd));
+            ps.setString(4, (new SimpleDateFormat("yyyy-MM-dd")).format(datumDo));
             ps.setString(5, festivalOpis);
             ps.setInt(6, maxUlaznicaF);
 
@@ -282,17 +280,17 @@ public class FestivalDAO implements Serializable {
             
             ResultSet rsId = ps.getGeneratedKeys();
             if (rsId.next()){
-                poslednjiIdFilm = rsId.getInt(1);
-                
+                poslednjiIdFestival = rsId.getInt(1);
             }
-
+            
             ps.close();
-
             connection.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(FilmDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FestivalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return poslednjiIdFilm;
+        return poslednjiIdFestival;
     }
 }
+
+

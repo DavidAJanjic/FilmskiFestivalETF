@@ -18,7 +18,7 @@ public class DB {
     }
 
     public static String user = "root";
-    public static String pass = "123456";
+    public static String pass = "";
 
     public static String protocol = "jdbc:mysql:";
     public static String ip = "localhost";

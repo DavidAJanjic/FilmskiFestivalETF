@@ -16,6 +16,8 @@ public class Lokacija {
     private int idMesto;
     private String imeLokacija;
     private String nazivSale;
+    
+    private String imeLokacijaNazivSale;
 
     public Lokacija() {
     }
@@ -58,6 +60,15 @@ public class Lokacija {
     public void setNazivSale(String nazivSale) {
         this.nazivSale = nazivSale;
     }
+
+    public String getImeLokacijaNazivSale() {
+        return imeLokacijaNazivSale;
+    }
+
+    public void setImeLokacijaNazivSale(String imeLokacijaNazivSale) {
+        this.imeLokacijaNazivSale = imeLokacijaNazivSale;
+    }
+    
 
     public List<SelectItem> dohvatiLokacije() {
         return LokacijaDAO.dohvatiSveLokacije().stream().map(x -> new SelectItem(x.getIdLokacija(), x.getImeLokacija())).collect(Collectors.toList());

@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <h:form>
-                        <p:dataTable var="kor" value="#{korisnik.sveRezervacije()}" rows="10"
+                        <p:dataTable var="kor" value="#{korisnik.rezervacijePoNazivu}" rows="10"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                      rowsPerPageTemplate="10">
@@ -41,15 +41,29 @@
                                 <h:outputText value="#{kor.idStatusRezervacije}" />
                             </p:column>
 
+                            <p:column headerText="Status rezervacije:">
+                                <h:selectOneMenu value="#{kor.statusRezIntPromena}">
+                                    <f:selectItem itemValue = "1" itemLabel = "Neodredjeno" /> 
+                                    <f:selectItem itemValue = "2" itemLabel = "Rezervisano" /> 
+                                    <f:selectItem itemValue = "3" itemLabel = "Odbijeno" /> 
+                                </h:selectOneMenu>
+                            </p:column>
+
                             <p:column headerText="Potvrdi promenu statusa rezervacije:">
-                                <f:facet name="header"/>
-                                <p:commandButton action="#{korisnik.promeniStatusRezervacije(kor.idRezervacija, 2)}" value="Potvrdi"/>            
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <p:commandButton value="Odobri rezervaciju" type="button" onclick="PF('dlg2').show();" />
+                                
+                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                                    <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." />
+                                <br/>
+                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(korisnik.idRezervacija, korisnik.statusRezIntPromena, korisnik.jedinstveniKod )}" value="Potvrdi"/>
+                            </p:dialog>   
                             </p:column>
+
                             
-                            <p:column headerText="Ukupan iznos za placanje:">
-                                <f:facet name="header"/>
-                                <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." />
-                            </p:column>
+
 
                             <f:facet name="paginatorTopLeft">
                                 <p:commandButton type="button" icon="pi pi-refresh" />
@@ -60,7 +74,6 @@
                             </f:facet>
 
                         </p:dataTable>
-
                     </h:form>
 
                     <br/>
@@ -92,4 +105,3 @@
         </div>
     </h:body>
 </html>
-

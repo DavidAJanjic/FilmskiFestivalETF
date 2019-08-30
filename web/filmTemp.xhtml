@@ -12,7 +12,7 @@
             <div class="row header_height">
                 <div class="col-6 text-center bg-secondary" >
                     <p class="mt-2 font-weight-bold font-italic header_text">
-                        Dodavanje filma
+                        Dodavanje novog filma
                     </p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         
                         Godina izdanja
                         <h:inputText value="#{film.godinaIzdanja}">
-                            <f:validateRegex pattern="^\d{4}$"/>
+                            <f:convertNumber integerOnly="true" minIntegerDigits="4" maxIntegerDigits="4" />
                         </h:inputText>
                         
                         <br/>
@@ -51,40 +51,48 @@
                         <br/>
                         
                         Reziser
-                        <h:selectOneMenu value="#{reziseriController.idReziser}">
+                        <h:selectOneMenu value="#{film.idReziser}">
                             <f:selectItem itemLabel="Izaberite rezisera" itemValue=""/>
-                            <f:selectItems value="#{reziseriController.dohvatiRezisere()}"></f:selectItems>
+                            <f:selectItems value="#{reziseri.dohvatiRezisere()}"></f:selectItems>
                         </h:selectOneMenu>
                         
                         <br/>
                         
                         Zemlja porekla
-                        <h:selectOneMenu value="#{zemljePoreklaController.idZemljePorekla}">
+                        <h:selectOneMenu value="#{film.idZemljePorekla}">
                             <f:selectItem itemLabel="Izaberite zemlju porekla" itemValue=""/>
-                            <f:selectItems value="#{zemljePoreklaController.pregledListeZemalja()}"></f:selectItems>
+                            <f:selectItems value="#{zemljePorekla.pregledListeZemalja()}"></f:selectItems>
                         </h:selectOneMenu>
                         
                         <br/>
                         
                         Uloge:
                         
-                        <h:selectOneMenu value="#{glumciController.idGlumac}">
+                        <h:selectOneMenu value="#{film.idGlumac}">
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
-                            <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+                            <f:selectItems value="#{glumci.dohvatiGlumce()}"></f:selectItems>
                         </h:selectOneMenu>
-                        <h:selectOneMenu value="#{glumciController.idGlumac}">
+                        <h:selectOneMenu value="#{film.idGlumac1}">
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
-                            <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+                            <f:selectItems value="#{glumci.dohvatiGlumce()}"></f:selectItems>
                         </h:selectOneMenu>
-                        <h:selectOneMenu value="#{glumciController.idGlumac}">
+                        <h:selectOneMenu value="#{film.idGlumac2}">
                             <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
-                            <f:selectItems value="#{glumciController.dohvatiGlumce()}"></f:selectItems>
+                            <f:selectItems value="#{glumci.dohvatiGlumce()}"></f:selectItems>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu value="#{film.idGlumac3}">
+                            <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
+                            <f:selectItems value="#{glumci.dohvatiGlumce()}"></f:selectItems>
+                        </h:selectOneMenu>
+                        <h:selectOneMenu value="#{film.idGlumac4}">
+                            <f:selectItem itemLabel="Izaberite glumce" itemValue=""/>
+                            <f:selectItems value="#{glumci.dohvatiGlumce()}"></f:selectItems>
                         </h:selectOneMenu>
                         <br/>
                         
                         Trajanje filma
                         <h:inputText value="#{film.trajanjeFilma}">
-                            <f:validateRegex pattern="^\d{4}$"/>
+                            <f:convertNumber integerOnly="true" minIntegerDigits="1" maxIntegerDigits="4" />
                         </h:inputText>
                         
                         <br/>
@@ -101,8 +109,8 @@
                         </h:inputText>
                         
                         <br/>
-                        <h:commandButton value="SUBMIT" action="#{filmController.dodajFilm()}"></h:commandButton>
-                        <h:commandButton action="#{korisnikController.nazad()}" value="Nazad" immediate="true"/>
+                        <h:commandButton value="SUBMIT" action="#{film.ubaciNoviFilm()}"></h:commandButton>
+                        <h:commandButton action="dodavanjeProjekcije" value="Nazad na dodavanje projekcija" immediate="true"/>
                     </h:form> 
                 </div>
                     </h:panelGrid>

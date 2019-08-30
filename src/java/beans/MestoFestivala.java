@@ -2,14 +2,16 @@
 package beans;
 
 import DAO.MestoFestivalaDAO;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.faces.model.SelectItem;
 
-@Named(value = "mestoFestivala")
+@ManagedBean(name = "mestoFestivala")
 @javax.faces.bean.SessionScoped
-public class MestoFestivala {
+public class MestoFestivala implements Serializable {
         int idMesto;
         String imeMesto;
         
@@ -38,7 +40,7 @@ public class MestoFestivala {
         this.imeMesto = imeMesto;
     }
     
-        public List<SelectItem> dohvatiMesta() {
+    public List<SelectItem> dohvatiMesta() {
         return MestoFestivalaDAO.dohvatiSvaMesta().stream().map(x -> new SelectItem(x.getIdMesto(),x.getImeMesto())).collect(Collectors.toList());
         
     }

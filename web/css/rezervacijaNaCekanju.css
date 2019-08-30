@@ -1,0 +1,80 @@
+.header_height{
+    height: 4rem;
+}
+.footer_height{
+    height: 4.5rem;
+}
+.full_page{
+    height: 100% !important;
+    width: 100% !important; 
+    padding: 0;
+}
+.footer_bottom_margin{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    height: 4rem;
+}
+.row{
+    margin: 0 !important;
+}
+.header_text{
+    font-size: 30px;
+    color: #feda6a;
+    text-transform: uppercase;
+}
+.footer_text{
+    font-size: 30px;
+    color: #feda6a;
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    padding: 0;
+}
+.font_color{
+    color: #feda6a;
+}
+.header-color, .footer-color{
+    background-color:  #1d1e22;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+    width: 100%;
+    padding: 5rem;
+    height: 97%;
+    
+}
+.heightMax{
+    height: 100%;
+    background-color: #1d1e22;
+}
+.row1{
+    height: 94%;
+    background-color: #1d1e22;
+    overflow-y: scroll;
+}
+.indexButton{
+    margin-top: 1rem;
+    background-color: #feda6a;
+    border: 1px solic #feda6a;
+    border-radius: 5px;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.nopadding{
+    padding: 0;
+    height: 100;
+    
+}
+.img-carousel{
+    height: 50%;
+}
+.m_top{
+    margin-top: 5rem;
+}

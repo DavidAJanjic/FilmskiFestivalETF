@@ -1,11 +1,13 @@
 package beans;
 
 import DAO.KorisnikDAO;
+import DAO.RezervacijaDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "korisnik")
@@ -27,7 +29,9 @@ public class Korisnik implements Serializable {
     private int brojPrekrsaja;
 
     private String msgLogIn;
-
+    
+    private Rezervacija selectedReservation;
+    
     public Korisnik(int idKorisnik, String username, String password, String ime, String prezime, Date datumRodjenja, String kontaktMob, String email, String tipKorisnikaString, int brojPrekrsaja) {
         this.idKorisnik = idKorisnik;
         this.username = username;
@@ -84,7 +88,9 @@ public class Korisnik implements Serializable {
     }
 
     List<Korisnik> sviKorisnici = new ArrayList<>();
-
+    
+    
+    
     public Korisnik() {
     }
 
@@ -124,6 +130,8 @@ public class Korisnik implements Serializable {
         this.brojPrekrsaja = brojPrekrsaja;
     }
 
+    
+    
     public int getIdKorisnik() {
         return idKorisnik;
     }
@@ -248,6 +256,7 @@ public class Korisnik implements Serializable {
 
     public String login() {
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
+        idKorisnik = k.idKorisnik;
         msgLogIn = null;
         if (k != null) {
             if (k.getTipKorisnikaInt() == 1) {
@@ -262,7 +271,7 @@ public class Korisnik implements Serializable {
                 return "banovan";
             }
         }
-        msgLogIn = "Uneti podatci nisu isprani! Molimo pokusajte ponovo!";
+        msgLogIn = "Uneti podatci nisu ispravni! Molimo pokusajte ponovo!";
         return "login";
     }
 
@@ -292,4 +301,134 @@ public class Korisnik implements Serializable {
         KorisnikDAO.odbaciZahtev(username, password);
         return "admin";
     }
+    
+    
+    
+        // kod za pregled svih postojecih rezervacija
+    private int idRezervacija;
+    private String jedinstveniKod;
+    private int idStatusRezervacije;
+    private Date datumRezervacije;
+    private Date datumIsteka;
+    private int brojUlaznica;
+    private int idProjekcija;
+    private int statusRezIntPromena;
+    private int cena;
+    
+    private List rezervacijeIspis;
+
+    public int getIdRezervacija() {
+        return idRezervacija;
+    }
+
+    public void setIdRezervacija(int idRezervacija) {
+        this.idRezervacija = idRezervacija;
+    }
+
+    public String getJedinstveniKod() {
+        return jedinstveniKod;
+    }
+
+    public void setJedinstveniKod(String jedinstveniKod) {
+        this.jedinstveniKod = jedinstveniKod;
+    }
+
+    public int getIdStatusRezervacije() {
+        return idStatusRezervacije;
+    }
+
+    public void setIdStatusRezervacije(int idStatusRezervacije) {
+        this.idStatusRezervacije = idStatusRezervacije;
+    }
+
+    public Date getDatumRezervacije() {
+        return datumRezervacije;
+    }
+
+    public void setDatumRezervacije(Date datumRezervacije) {
+        this.datumRezervacije = datumRezervacije;
+    }
+
+    public Date getDatumIsteka() {
+        return datumIsteka;
+    }
+
+    public void setDatumIsteka(Date datumIsteka) {
+        this.datumIsteka = datumIsteka;
+    }
+
+    public int getBrojUlaznica() {
+        return brojUlaznica;
+    }
+
+    public void setBrojUlaznica(int brojUlaznica) {
+        this.brojUlaznica = brojUlaznica;
+    }
+
+    public int getIdProjekcija() {
+        return idProjekcija;
+    }
+
+    public void setIdProjekcija(int idProjekcija) {
+        this.idProjekcija = idProjekcija;
+    }
+
+    public int getCena() {
+        return cena;
+    }
+
+    public void setCena(int cena) {
+        this.cena = cena;
+    }
+
+    public int getStatusRezIntPromena() {
+        return statusRezIntPromena;
+    }
+
+    public void setStatusRezIntPromena(int statusRezIntPromena) {
+        this.statusRezIntPromena = statusRezIntPromena;
+    }
+
+    public List<Rezervacija> sveRezervacije() throws SQLException {
+        return RezervacijaDAO.dohvatiSveRezervacije();
+    }
+    
+    public String promeniStatusRezervacije(int idRezervacija, int idStatusRezervacije) throws SQLException {
+        
+        RezervacijaDAO.setStatusRezervacije(idRezervacija, idStatusRezervacije);
+        return "prodavac";
+    }
+    
+    List<Rezervacija> rezervacijePoNazivu = new ArrayList<>();
+
+    public List getRezervacijeIspis() {
+        return rezervacijeIspis;
+    }
+
+    public void setRezervacijeIspis(List rezervacijeIspis) {
+        this.rezervacijeIspis = rezervacijeIspis;
+    }
+
+    public List<Rezervacija> getRezervacijePoNazivu() {
+        return rezervacijePoNazivu;
+    }
+
+    public void setRezervacijePoNazivu(List<Rezervacija> rezervacijePoNazivu) {
+        this.rezervacijePoNazivu = rezervacijePoNazivu;
+    }
+
+    public String dohvatiRezervacijePoNazivu() throws SQLException {
+        rezervacijePoNazivu = RezervacijaDAO.dohvatiRezervacijePoImenuIPrezimenu(ime, prezime);
+        return "prodavacPretraga";
+    }
+
+    public Rezervacija getSelectedReservation() {
+        return selectedReservation;
+    }
+
+    public void setSelectedReservation(Rezervacija selectedReservation) {
+        this.selectedReservation = selectedReservation;
+    }
+    
+    
 }

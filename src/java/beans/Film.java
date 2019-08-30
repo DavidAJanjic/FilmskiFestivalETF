@@ -1,14 +1,20 @@
 package beans;
 
 import DAO.FilmDAO;
+import DAO.GlumciDAO;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "film")
 @SessionScoped
-public class Film {
+public class Film implements Serializable {
 
     private int idFilm;
     private String originalniNaziv;
@@ -24,6 +30,10 @@ public class Film {
     private int ocenaSUM;
     private int ocenaCOUNT;
     private int idGlumac;
+    private int idGlumac1;
+    private int idGlumac2;
+    private int idGlumac3;
+    private int idGlumac4;
     private String zemljaPorekla;
     private String sviGlumciFilma;
     private String nazivFestivalaZaDatiFilm;
@@ -32,6 +42,16 @@ public class Film {
     private Film film;
 
     public Film() {
+        
+        //GET ZA VRACANJE NAZIVA FILMA (I FESTIVALA) U URL-u
+    }
+    public void onLoad() throws SQLException{
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+        .getRequest();
+
+        String nazivFilma = request.getParameter("naziv_filma");
+        String nazivFestivalaZaProjekciju = request.getParameter("naziv_festivala_za_projekciju");
+        this.film = FilmDAO.ispisFilmaZaKorisnika(nazivFilma, nazivFestivalaZaProjekciju);
     }
 
     public Film(int idFilm, String originalniNaziv, String nazivNaSrpskom, int godIzdanja, String filmOpis, int idReziser, int idZemljePorekla, int trajanjeFilma, String imdbLink, String poster) {
@@ -83,8 +103,6 @@ public class Film {
         this.prosecnaOcena = prosecnaOcena;
     }
 
-   
-    
     public Film getFilm() {
         return film;
     }
@@ -92,7 +110,7 @@ public class Film {
     public void setFilm(Film film) {
         this.film = film;
     }
-    
+
     public String getNazivFestivalaZaDatiFilm() {
         return nazivFestivalaZaDatiFilm;
     }
@@ -100,7 +118,7 @@ public class Film {
     public void setNazivFestivalaZaDatiFilm(String nazivFestivalaZaDatiFilm) {
         this.nazivFestivalaZaDatiFilm = nazivFestivalaZaDatiFilm;
     }
-    
+
     public String getSviGlumciFilma() {
         return sviGlumciFilma;
     }
@@ -108,7 +126,7 @@ public class Film {
     public void setSviGlumciFilma(String sviGlumciFilma) {
         this.sviGlumciFilma = sviGlumciFilma;
     }
-    
+
     public String getZemljaPorekla() {
         return zemljaPorekla;
     }
@@ -116,7 +134,7 @@ public class Film {
     public void setZemljaPorekla(String zemljaPorekla) {
         this.zemljaPorekla = zemljaPorekla;
     }
-    
+
     public String getNazivReziser() {
         return nazivReziser;
     }
@@ -124,7 +142,7 @@ public class Film {
     public void setNazivReziser(String nazivReziser) {
         this.nazivReziser = nazivReziser;
     }
-    
+
     public int getIdFilm() {
         return idFilm;
     }
@@ -233,16 +251,58 @@ public class Film {
         return poslednjiIdFilm;
     }
 
+    public int getIdGlumac1() {
+        return idGlumac1;
+    }
+
+    public void setIdGlumac1(int idGlumac1) {
+        this.idGlumac1 = idGlumac1;
+    }
+
+    public int getIdGlumac2() {
+        return idGlumac2;
+    }
+
+    public void setIdGlumac2(int idGlumac2) {
+        this.idGlumac2 = idGlumac2;
+    }
+
+    public int getIdGlumac3() {
+        return idGlumac3;
+    }
+
+    public void setIdGlumac3(int idGlumac3) {
+        this.idGlumac3 = idGlumac3;
+    }
+
+    public int getIdGlumac4() {
+        return idGlumac4;
+    }
+
+    public void setIdGlumac4(int idGlumac4) {
+        this.idGlumac4 = idGlumac4;
+    }
+
     public void setPoslednjiIdFilm(int poslednjiIdFilm) {
         this.poslednjiIdFilm = poslednjiIdFilm;
     }
 
     public void ubaciNoviFilm() {
-        FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac);
+        FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac, idGlumac1, idGlumac2, idGlumac3, idGlumac4);
+    }
+
+    public String ispisFilmZaKorisnika(String originalniNazivFilma, String nazivFestivalaZaProjekciju) throws SQLException {
+        this.film = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma, nazivFestivalaZaProjekciju);
+        return "opisFilm_1?naziv_filma="+originalniNazivFilma;
+    }
+
+    public List<SelectItem> dodajFilmZaProjekciju() {
+        return FilmDAO.dohvatiSveFilmove().stream().map(x -> new SelectItem(x.getIdFilm(), x.getOriginalniNaziv())).collect(Collectors.toList());
 
     }
-    public String ispisFilmZaKorisnika(String originalniNazivFilma, String nazivFestivalaZaProjekciju) throws SQLException{
-        this.film = FilmDAO.ispisFilmaZaKorisnika(originalniNazivFilma,nazivFestivalaZaProjekciju);
-        return "opisFilm_1";
+    
+    public List<SelectItem> dohvatiGlumce() {
+        return GlumciDAO.dohvatiSveGlumce().stream().map(x -> new SelectItem(x.getIdGlumac(),x.getImeGlumac())).collect(Collectors.toList());
+        
     }
 }
