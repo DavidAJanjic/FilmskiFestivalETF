@@ -18,12 +18,12 @@ public class DB {
     }
 
     public static String user = "root";
-    public static String pass = "";
+    public static String pass = "123456";
 
     public static String protocol = "jdbc:mysql:";
     public static String ip = "localhost";
     public static String port = "3306";
-    public static String dbName = "festival";
+    public static String dbName = "filmfestival";
 
     public static String connectionString = protocol + "//" + ip + ":"
             + port + "/" + dbName + "?useSSL=false";

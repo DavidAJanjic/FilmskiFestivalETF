@@ -6,8 +6,12 @@ import DAO.RezervacijaDAO;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "korisnik")
@@ -30,6 +34,12 @@ public class Korisnik implements Serializable {
 
     private String msgLogIn;
 
+    
+    private static final String encryptionKey = "ABCDEFGHIJKLMNOP";
+    private static final String characterEncoding = "UTF-8";
+    private static final String cipherTransformation = "AES/CBC/PKCS5PADDING";
+    private static final String aesEncryptionAlgorithem = "AES";
+    
     public Korisnik(int idKorisnik, String username, String password, String ime, String prezime, Date datumRodjenja, String kontaktMob, String email, String tipKorisnikaString, int brojPrekrsaja) {
         this.idKorisnik = idKorisnik;
         this.username = username;
@@ -219,14 +229,34 @@ public class Korisnik implements Serializable {
     }
 
     public String dodajKorisnika() throws SQLException {
+        String encryptedText = "";
         if (password.equals(newPassword)) {
-            String result = KorisnikDAO.dodajKorisnika(username, password, ime, prezime, kontaktMob, email, datumRodjenja);
-            if (result != "notOk") {
-                return "index";
+
+            
+            try {
+                Cipher cipher = Cipher.getInstance(cipherTransformation);
+                byte[] key = encryptionKey.getBytes(characterEncoding);
+                SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
+                IvParameterSpec ivparameterspec = new IvParameterSpec(key);
+                cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivparameterspec);
+                byte[] cipherText = cipher.doFinal(password.getBytes("UTF8"));
+                Base64.Encoder encoder = Base64.getEncoder();
+                encryptedText = encoder.encodeToString(cipherText);
+
+            } catch (Exception E) {
+                System.err.println("Encrypt Exception : " + E.getMessage());
             }
+            
         }
-        msgLogIn = "Korisnicko ime je zauzeto ili ste pogresno ponovili password, pokusajte ponovo!";
-        return "registracija";
+
+        String result = KorisnikDAO.dodajKorisnika(username, encryptedText, ime, prezime, kontaktMob, email, datumRodjenja);
+        if (result != "notOk") {
+            return "index";
+        }
+    
+    msgLogIn  = "Korisnicko ime je zauzeto ili ste pogresno ponovili password, pokusajte ponovo!";
+
+return "registracija";
     }
 
     public String nazad() {
@@ -237,23 +267,25 @@ public class Korisnik implements Serializable {
         return "filmTemp";
     }
 
-//    public String loginKorisnik() {
-//        loginKorisnik = KorisnikDAO.dohvatiKorisnika(username, password);
-//        if (loginKorisnik.getTipKorisnikaInt() == 2) {
-//            return "regKorisnik";
-//        } else if (loginKorisnik.getTipKorisnikaInt() == 3) {
-//            return "prodavac";
-//        } else if (loginKorisnik.getTipKorisnikaInt() == 4) {
-//            return "admin";
-//        } else if (loginKorisnik.getTipKorisnikaInt() == 5) {
-//            return "banovan";
-//        } else {
-//            return "neRegKorisnik";
-//        }
-//    }
-
     public String login() {
-        Korisnik k = KorisnikDAO.dohvatiKorisnika(username, password);
+        
+        String encryptedText = "";
+        try {
+                Cipher cipher = Cipher.getInstance(cipherTransformation);
+                byte[] key = encryptionKey.getBytes(characterEncoding);
+                SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
+                IvParameterSpec ivparameterspec = new IvParameterSpec(key);
+                cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivparameterspec);
+                byte[] cipherText = cipher.doFinal(password.getBytes("UTF8"));
+                Base64.Encoder encoder = Base64.getEncoder();
+                encryptedText = encoder.encodeToString(cipherText);
+
+            } catch (Exception E) {
+                System.err.println("Encrypt Exception : " + E.getMessage());
+            }
+        
+        
+        Korisnik k = KorisnikDAO.dohvatiKorisnika(username, encryptedText);
         idKorisnik = k.getIdKorisnik();
         ime = k.getIme();
         msgLogIn = null;
