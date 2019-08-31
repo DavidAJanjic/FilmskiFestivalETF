@@ -1,229 +1,130 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-
       xmlns:p="http://primefaces.org/ui">
-
     <h:head>
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
-
         <link rel="stylesheet" href="css/registracija.css"></link>
-
         <title>Registracija</title>
-
     </h:head>
-
     <h:body>
-
         <div class="full_page">
-
             <div class="row header_height header-color">
-
                 <div class="col-3">
-
                     <p class="font_color">Logo side</p>
-
                 </div>
-
                 <div class="col-6 text-center" >
-
                     <p class="mt-2 font-weight-bold header_text">
-
                         Registration
-
                     </p>
-
                 </div>
-
                 <div class="col-3 text-center pt-3">
-
                     <h:form>
-
                         <h:commandLink class="mr-3 font_color" action="login"></h:commandLink>
-
                         <h:commandLink class="font_color" action="registracija"></h:commandLink>
-
                         <h:commandLink class="ml-3 font_color" action="#{korisnikController.nazad()}">Nazad</h:commandLink>
-
                     </h:form>
-
                 </div>
-
             </div>
-
             <div class="main_content_registration background_image_registration">
-
                 <div class="row m-auto">
-
                     <div class="col-12">
-
                         <h:form class="form m-auto">
-
+                            
                             <h:panelGrid columns="1" class="text-center">
-
                                 <h:panelGrid columns="1" class="text-center" rendered="#{korisnik.msgLogIn!=null}">
-
                                     <div class="alert alert-warning alert-dismissible" >
-
-                                        <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
-
+                                        <button type="button" class="close" onclick="this.parentElement.style.display = 'none';">&times;</button>
                                         #{korisnik.msgLogIn}
-
                                     </div>
-
                                 </h:panelGrid>
-
                                 <h:panelGrid columns="2">
-
                                     <p>Korisnicko ime:</p>
-
-                                    <h:inputText class="input_registration" value="#{korisnik.username}"
-
-                                                 required="true" requiredMessage="Morate uneti korisnicko ime"/>
-
-                                                 <!--<f:validateRegex pattern="^(?=.*[A-Z]{2,})(?=.*[a-z{3,}])(?=.\d)[A-Za-z\d]{8,12}$"/>-->
-
-                                                 
-
-                                    <p>Password:</p>
-
-                                    <h:inputText class="input_registration" value="#{korisnik.password}" 
-
-                                                 required="true" 
-
-                                                 requiredMessage="Morate uneti lozinku" 
-
-                                                 validatorMessage="Lozinka mora sadrzati Veliko slovo na pocetku, bar 2 broja i bar 3 mala slova">
-
-                                        <!--<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$"/>  ovde more vise validacija da ne bi postojao red!-->
-
+                                    <h:inputText id="input_registration" class="input_registration" value="#{korisnik.username}"
+                                                 required="true" requiredMessage="Morate uneti korisnicko ime" 
+                                                 validatorMessage="Korisnicko ime moze sadrzati samo velika i mala slova i brojeve i moze imati max 20 karaktera"
+                                                 autocomplete="off">
+                                                
+                                    <f:validateRegex pattern="^[a-zA-Z1-9]{1,20}$" />  
                                     </h:inputText>
+                                    
+                                    
+                                    <p>Password:</p>
+                                    <h:inputSecret class="input_registration" value="#{korisnik.password}" 
+                                                 required="true" 
+                                                 requiredMessage="Morate uneti lozinku" 
+                                                 validatorMessage="Lozinka mora sadrzati Veliko slovo na pocetku, bar 2 broja i bar 3 mala slova"
+                                                 autocomplete="off">
+                                        <f:validateRegex pattern="^[A-Z](?=(.*\d){1})(?=.*[a-z]{3})(?=.*[A-Z]{2})[0-9a-zA-Z]{7,11}$"/>
 
-  
+                                    </h:inputSecret>
 
                                     <p>Password again:</p>
-
-                                    <h:inputText class="input_registration" value="#{korisnik.newPassword}" 
-
+                                    <h:inputSecret class="input_registration" value="#{korisnik.newPassword}" 
                                                  required="true" 
-
                                                  requiredMessage="Morate uneti lozinku" 
-
-                                                 validatorMessage="Lozinka mora sadrzati Veliko slovo na pocetku, bar 2 broja i bar 3 mala slova">
-
-                                        <!--<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$"/>  ovde more vise validacija da ne bi postojao red!-->
-
-                                    </h:inputText>
-
-  
+                                                 validatorMessage="Lozinka mora sadrzati Veliko slovo na pocetku, bar 2 broja i bar 3 mala slova"
+                                                 autocomplete="off">
+                                        <f:validateRegex pattern="^[A-Z](?=(.*\d){1})(?=.*[a-z]{3})(?=.*[A-Z]{2})[0-9a-zA-Z]{7,11}$"/>  
+                                    </h:inputSecret>
 
                                     <p>Ime:</p>
-
                                     <h:inputText class="input_registration" value="#{korisnik.ime}" 
-
                                                  required="true" 
-
                                                  requiredMessage="Morate uneti ime" 
-
-                                                 validatorMessage="Ime moze sadrzati samo velika i mala slova">
-
+                                                 validatorMessage="Ime moze sadrzati samo velika i mala slova"
+                                                 autocomplete="off">
                                         <f:validateRegex pattern="^[a-zA-Z]+$"/>
-
                                     </h:inputText>
-
-
 
                                     <p>Prezime:</p>
-
                                     <h:inputText class="input_registration" value="#{korisnik.prezime}" 
-
                                                  required="true" 
-
                                                  requiredMessage="Morate uneti prezime" 
-
-                                                 validatorMessage="prezime moze sadrzati samo velika i mala slova">
-
+                                                 validatorMessage="prezime moze sadrzati samo velika i mala slova"
+                                                 autocomplete="off">
                                         <f:validateRegex pattern="^[a-zA-Z]+$"/>
-
                                     </h:inputText>
-
-
 
                                     <p>E-mail adresa:</p> 
-
                                     <h:inputText class="input_registration" value="#{korisnik.email}"
-
                                                  required="true" 
-
                                                  requiredMessage="Morate uneti email" 
-
-                                                 validatorMessage="E-mail mora biti formata ***@***.***">
-
+                                                 validatorMessage="E-mail mora biti formata ***@***.***"
+                                                 autocomplete="off">
                                         <f:validateRegex pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"/>
-
                                     </h:inputText>
-
-
 
                                     <p>Kontakt telefon:</p> 
-
                                     <h:inputText class="input_registration" value="#{korisnik.kontaktMob}"
-
                                                  required="true" 
-
-                                                 requiredMessage="Morate uneti kontakt telefon">
-
-                                        <!--<f:validateRegex pattern="^[+]{0,1}[0-9]{0,5}[0][1-9]{2}[\s\./0-9]{6,7}$"/>-->
-
+                                                 requiredMessage="Morate uneti kontakt telefon"
+                                                 validatorMessage="Kontakt telefon mora sadrzati bar 9 cifara"
+                                                 autocomplete="off">
+                                        <f:validateRegex pattern="^[+]{0,1}[0-9]{0,5}[0][1-9]{2}[\s\./0-9]{6,7}$"/>
                                     </h:inputText>
 
-
-
                                     <p>Datum rodjenja:</p>
-
                                     <p:calendar class="input_registration" mode="popup" value="#{korisnik.datumRodjenja}" 
-
-                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy">
-
+                                                yearRange="c-100:c" navigator="true" pattern="dd/MM/yyyy" autocomplete="off">
                                     </p:calendar>
-
                                 </h:panelGrid>
-
                                 <h:commandButton class="btn btn_registration" action="#{korisnik.dodajKorisnika()}" value="Registruj se"/>
-
+                                <h:messages style="color:red;"/>
                             </h:panelGrid>
-
                         </h:form>
-
                     </div>
-
                 </div>
-
             </div>
-
             <div class="row footer_bottom_margin footer-color">
-
                 <div class="col-12 text-center footer_height">
-
                     <p class="font-weight-bold font-italic footer_text">
-
                         Thank you for your registration!
-
                     </p>
-
                 </div>
-
             </div>
-
         </div>
-
     </h:body>
-
 </html>

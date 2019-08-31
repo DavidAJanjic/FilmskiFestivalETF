@@ -10,21 +10,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
-@Named(value = "reziseri")
+@ManagedBean(name = "reziseri")
 public class Reziseri {
     int idReziser;
-    String imeReziser;
+    String imeReziseri;
     
     private List<String> sviReziseriLista;
 
     public Reziseri() {
     }
 
-    public Reziseri(int idReziser, String imeReziser) {
+    public Reziseri(int idReziser, String imeReziseri) {
         this.idReziser = idReziser;
-        this.imeReziser = imeReziser;
+        this.imeReziseri = imeReziseri;
     }
 
     public int getIdReziser() {
@@ -35,12 +36,12 @@ public class Reziseri {
         this.idReziser = idReziser;
     }
 
-    public String getImeReziser() {
-        return imeReziser;
+    public String getImeReziseri() {
+        return imeReziseri;
     }
 
-    public void setImeReziser(String imeReziser) {
-        this.imeReziser = imeReziser;
+    public void setImeReziseri(String imeReziseri) {
+        this.imeReziseri = imeReziseri;
     }
 
 
@@ -54,7 +55,7 @@ public class Reziseri {
     
         // metoda za vracanje svih rezisera za SelectOneMenu
     public List<SelectItem> dohvatiRezisere() {
-        return ReziseriDAO.dohvatiSveRezisere().stream().map(x -> new SelectItem(x.getIdReziser(), x.getImeReziser())).collect(Collectors.toList());
+        return ReziseriDAO.dohvatiSveRezisere().stream().map(x -> new SelectItem(x.getIdReziser(), x.getImeReziseri())).collect(Collectors.toList());
 
 
     }

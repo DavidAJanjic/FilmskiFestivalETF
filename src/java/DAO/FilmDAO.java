@@ -19,7 +19,8 @@ public class FilmDAO {
     
     public static boolean dodajFilm(String originalniNaziv, String nazivNaSrpskom, 
             int godinaIzdanja, String filmOpis, int idReziser, int idZemljePorekla, 
-            int trajanjeFilma, String imdbLink, String poster, int idGlumac) {
+            int trajanjeFilma, String imdbLink, String poster, int idGlumac, 
+            int idGlumac1, int idGlumac2, int idGlumac3, int idGlumac4) {
         
         String filmSql = "insert into film(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String ulogeSql = "insert into uloge(idFilm, idGlumac) values (?, ?)";
@@ -46,16 +47,48 @@ public class FilmDAO {
             }
             
             PreparedStatement ps2 = connection.prepareStatement(ulogeSql);
-            
-            ps2.setInt(1,idFilm);
-            ps2.setInt(2,idGlumac);
+
+            ps2.setInt(1, idFilm);
+            ps2.setInt(2, idGlumac);
             
             ps2.executeUpdate();
+            
+            PreparedStatement ps3 = connection.prepareStatement(ulogeSql);
+
+            ps3.setInt(1, idFilm);
+            ps3.setInt(2, idGlumac1);
+            
+            ps3.executeUpdate();
+
+            PreparedStatement ps4 = connection.prepareStatement(ulogeSql);
+
+            ps4.setInt(1, idFilm);
+            ps4.setInt(2, idGlumac2);
+            
+            ps4.executeUpdate();
+            
+            PreparedStatement ps5 = connection.prepareStatement(ulogeSql);
+
+            ps5.setInt(1, idFilm);
+            ps5.setInt(2, idGlumac3);
+            
+            ps5.executeUpdate();
+            
+            PreparedStatement ps6 = connection.prepareStatement(ulogeSql);
+
+            ps6.setInt(1, idFilm);
+            ps6.setInt(2, idGlumac4);
+            
+            ps6.executeUpdate();
             
             
             
             ps.close();
             ps2.close();
+            ps3.close();
+            ps4.close();
+            ps5.close();
+            ps6.close();
             connection.close();
                 
             return true;

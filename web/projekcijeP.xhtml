@@ -39,7 +39,8 @@
 <!--                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma, p.nazivFestivalaZaProjekciju)}">#{p.originalniNazivFilma}
                                     <f:actionListener binding="#{projekcija.ispisNaZahtevKosinika(p.originalniNazivFilma)}" />
                                 </h:commandLink>-->
-                                <h:commandLink>
+                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma, p.nazivFestivalaZaProjekciju)}">
+                                    <f:actionListener binding="#{projekcija.ispisNaZahtevKosinika(p.originalniNazivFilma)}" />
                                     <h:link outcome="opisFilm_1" value="#{p.originalniNazivFilma}">
                                         <f:param name="naziv_filma" value="#{p.originalniNazivFilma}"/>
                                         <f:param name="naziv_festivala_za_projekciju" value="#{p.nazivFestivalaZaProjekciju}"/>

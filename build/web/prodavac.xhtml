@@ -6,12 +6,32 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Seller</title>
+        <link rel="stylesheet" href="css/login.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+
         <f:event type="preRenderView" listener="#{korisnik.login()}"></f:event>
     </h:head>
     <h:body>
+        <div class="row header_height header-color">
+            <div class="col-3">
+                <p class="font_color">Logo side</p>
+            </div>
+            <div class="col-6 text-center" >
+                <p class="mt-2 font-weight-bold header_text">
+                    Log In
+                </p>
+            </div>
+            <div class="col-3 text-center pt-3">
+                <h:form>
+                    <h:commandLink class="font_color" action="index">Nazad</h:commandLink>
+                </h:form>
+            </div>
+        </div>
         <div>
+
             <div class="row">
                 <div class="col-12">
+
                     <h:form>
                         <p:dataTable var="kor" value="#{korisnik.sveRezervacije()}" rows="10"
                                      paginator="true"
@@ -38,34 +58,31 @@
                             </p:column>
 
                             <p:column headerText="Status rezervacije">
-                                <h:outputText value="#{kor.idStatusRezervacije}" />
+                                <h:outputText value="#{kor.status}" />
                             </p:column>
 
-                            <p:column headerText="Status rezervacije:">
-                                <h:selectOneMenu value="#{kor.statusRezIntPromena}">
-                                    <f:selectItem itemValue = "1" itemLabel = "Neodredjeno" /> 
-                                    <f:selectItem itemValue = "2" itemLabel = "Rezervisano" /> 
-                                    <f:selectItem itemValue = "3" itemLabel = "Odbijeno" /> 
-                                </h:selectOneMenu>
-                            </p:column>
+                            <p:column headerText="Cena ulaznica:">
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Ukupan iznos za placanje" type="button" onclick="PF('dlg2').show();" />
 
-                            <p:column headerText="Potvrdi promenu statusa rezervacije:">
+                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                                    <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." /> 
+                                </p:dialog>   
+
+                            </p:column>
+                            <p:column headerText="Potvrdi rezervaciju:">
                                 <f:facet name="header">
 
                                 </f:facet>
-                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(kor.idRezervacija, korisnik.statusRezIntPromena, korisnik.jedinstveniKod )}" value="Potvrdi"/>
-                                <p:commandButton value="Odobri rezervaciju" type="button" onclick="PF('dlg2').show();" />
-                                
-                                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                                    <h:outputText value="Cena rezervisanih ulaznica je: #{kor.brojUlaznica * kor.cena} dinara." />
-                                <br/>
-                                
-                            </p:dialog>   
+                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(kor.idRezervacija, 2)}" value="Potvrdi"/>
                             </p:column>
 
-                            
+                            <p:column headerText="Odbaci rezervaciju:">
+                                <f:facet name="header">
 
-
+                                </f:facet>
+                                <h:commandButton action="#{korisnik.promeniStatusRezervacije(kor.idRezervacija, 3)}" value="Odbaci"/>
+                            </p:column>
                             <f:facet name="paginatorTopLeft">
                                 <p:commandButton type="button" icon="pi pi-refresh" />
                             </f:facet>
@@ -104,6 +121,16 @@
 
                 </div>
             </div>
+            
+
+        </div>
+        
+        <div class="col-12 text-center footer_height">
+            <p class="font-weight-bold font-italic footer_text">
+<div class="row footer_bottom_margin footer-color">
+
+            </div>
+            </p>
         </div>
     </h:body>
 </html>

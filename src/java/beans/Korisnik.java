@@ -286,10 +286,11 @@ return "registracija";
         
         
         Korisnik k = KorisnikDAO.dohvatiKorisnika(username, encryptedText);
-        idKorisnik = k.getIdKorisnik();
-        ime = k.getIme();
+        
         msgLogIn = null;
         if (k != null) {
+            idKorisnik = k.getIdKorisnik();
+            ime = k.getIme();
             if (k.getTipKorisnikaInt() == 1) {
                 return "neRegKorisnik";
             } else if (k.getTipKorisnikaInt() == 2) {
@@ -446,8 +447,8 @@ return "registracija";
     
     
 
-    public String promeniStatusRezervacije(int idRezervacija, int statusRezIntPromena, String jedinstveniKod) throws SQLException {
-        RezervacijaDAO.setStatusRezervacije(idRezervacija, statusRezIntPromena, jedinstveniKod);
+       public String promeniStatusRezervacije(int idRezervacija, int statusRezIntPromena) throws SQLException {
+        RezervacijaDAO.setStatusRezervacije(idRezervacija, statusRezIntPromena);
         return "prodavac";
     }
     

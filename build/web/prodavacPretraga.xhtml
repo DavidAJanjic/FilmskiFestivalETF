@@ -6,10 +6,28 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Seller</title>
+        <link rel="stylesheet" href="css/login.css"></link>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+    
         <f:event type="preRenderView" listener="#{korisnik.login()}"></f:event>
     </h:head>
     <h:body>
         <div>
+            <div class="row header_height header-color">
+                <div class="col-3">
+                    <p class="font_color">Logo side</p>
+                </div>
+                <div class="col-6 text-center" >
+                    <p class="mt-2 font-weight-bold header_text">
+                        Log In
+                    </p>
+                </div>
+                <div class="col-3 text-center pt-3">
+                    <h:form>
+                        <h:commandLink class="font_color" action="index">Nazad</h:commandLink>
+                    </h:form>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <h:form>
@@ -102,6 +120,13 @@
 
                 </div>
             </div>
+            <div class="row footer_bottom_margin footer-color">
+            <div class="col-12 text-center footer_height">
+                <p class="font-weight-bold font-italic footer_text">
+
+                </p>
+            </div>
+        </div>
         </div>
     </h:body>
 </html>

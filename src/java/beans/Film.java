@@ -29,12 +29,17 @@ public class Film implements Serializable {
     private int ocenaSUM;
     private int ocenaCOUNT;
     private int idGlumac;
+    private int idGlumac1;
+    private int idGlumac2;
+    private int idGlumac3;
+    private int idGlumac4;
     private String zemljaPorekla;
     private String sviGlumciFilma;
     private String nazivFestivalaZaDatiFilm;
     private int prosecnaOcena;
     private int poslednjiIdFilm;
     private Film film;
+    private String imeReziseri;
 
     public Film() {
     }
@@ -248,9 +253,52 @@ public class Film implements Serializable {
         this.poslednjiIdFilm = poslednjiIdFilm;
     }
 
-    public void ubaciNoviFilm() {
-        FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, poster, idGlumac);
+    public int getIdGlumac1() {
+        return idGlumac1;
+    }
 
+    public void setIdGlumac1(int idGlumac1) {
+        this.idGlumac1 = idGlumac1;
+    }
+
+    public int getIdGlumac2() {
+        return idGlumac2;
+    }
+
+    public void setIdGlumac2(int idGlumac2) {
+        this.idGlumac2 = idGlumac2;
+    }
+
+    public int getIdGlumac3() {
+        return idGlumac3;
+    }
+
+    public void setIdGlumac3(int idGlumac3) {
+        this.idGlumac3 = idGlumac3;
+    }
+
+    public int getIdGlumac4() {
+        return idGlumac4;
+    }
+
+    public void setIdGlumac4(int idGlumac4) {
+        this.idGlumac4 = idGlumac4;
+    }
+
+    public String getImeReziseri() {
+        return imeReziseri;
+    }
+
+    public void setImeReziseri(String imeReziseri) {
+        this.imeReziseri = imeReziseri;
+    }
+    
+    
+
+    public void ubaciNoviFilm() {
+        FilmDAO.dodajFilm(originalniNaziv, nazivNaSrpskom, godinaIzdanja, 
+                filmOpis, idReziser, idZemljePorekla, trajanjeFilma, imdbLink, 
+                poster, idGlumac, idGlumac1, idGlumac2, idGlumac3, idGlumac4);
     }
 
     public String ispisFilmZaKorisnika(String originalniNazivFilma, String nazivFestivalaZaProjekciju) throws SQLException {

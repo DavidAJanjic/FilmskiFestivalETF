@@ -26,11 +26,11 @@ public class ReziseriDAO {
 
             while (rs.next()) {
                 int idReziser = rs.getInt("idReziser");
-                String imeReziser = rs.getString("imeReziser");
+                String imeReziseri = rs.getString("imeReziseri");
                 
                 Reziseri reziser = new Reziseri();
                 reziser.setIdReziser(idReziser);
-                reziser.setImeReziser(imeReziser);
+                reziser.setImeReziseri(imeReziseri);
                 
                 sviReziseriLista.add(reziser);
 

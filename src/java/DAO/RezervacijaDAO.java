@@ -49,8 +49,9 @@ public class RezervacijaDAO {
     
         public static List<Rezervacija> dohvatiSveRezervacije() throws SQLException {
         String sql = "select r.idRezervacija, r.idProjekcija, r.jedinstveniKod, r.idStatusRezervacije,"
-                + "r.datumRezervacije, r.datumIsteka, r.brojUlaznica, k.ime, k.prezime, p.cena "
-                + "from rezervacija r, korisnik k, projekcija p WHERE r.idKorisnika = k.idKorisnik and p.idProjekcija = r.idProjekcija;";
+                + "r.datumRezervacije, r.datumIsteka, r.brojUlaznica, k.ime, k.prezime, p.cena, s.idStatusaRezervacije, s.status "
+                + "from rezervacija r, korisnik k, projekcija p, status_rezervacija s "
+                + "WHERE r.idKorisnika = k.idKorisnik and p.idProjekcija = r.idProjekcija and s.idStatusaRezervacije = r.idStatusRezervacije;";
         List<Rezervacija> sveRezervacije = new ArrayList<>();
 
         try (
@@ -71,6 +72,7 @@ public class RezervacijaDAO {
                 rezervacija.setIme(rs.getString("ime"));
                 rezervacija.setPrezime(rs.getString("prezime"));
                 rezervacija.setCena(rs.getInt("cena"));
+                rezervacija.setStatus(rs.getString("status"));
 
                 sveRezervacije.add(rezervacija);
             }
@@ -78,36 +80,9 @@ public class RezervacijaDAO {
         return sveRezervacije;
     }
 
-    public static String getKod() {
-        String slova = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder kod = new StringBuilder();
-        Random random = new Random();
-        while (kod.length() < 10) {
-            int index = (int) (random.nextFloat() * slova.length());
-            kod.append(slova.charAt(index));
-        }
-        String kod1 = kod.toString();
-        return kod1;
-    }
 
-    public static void setStatusRezervacije(int idRezervacija, int statusRezIntPromena, String jedinstveniKod) throws SQLException {
-        jedinstveniKod = getKod();
+    public static void setStatusRezervacije(int idRezervacija, int statusRezIntPromena) throws SQLException {
 
-        if (statusRezIntPromena == 2) {
-            String sql = "UPDATE rezervacija SET idStatusRezervacije = ? and jedinstveniKod = ? where idRezervacija = ?";
-
-            try (
-                    Connection connection = DB.otvoriKonekciju();
-                    PreparedStatement ps = connection.prepareStatement(sql);) {
-
-                ps.setInt(1, statusRezIntPromena);
-                
-                ps.setString(2, jedinstveniKod);
-                ps.setInt(3, idRezervacija);
-
-                ps.executeUpdate();
-            }
-        } else {
             String sql = "UPDATE rezervacija SET idStatusRezervacije = ? where idRezervacija = ?";
             try (
                     Connection connection = DB.otvoriKonekciju();
@@ -119,7 +94,6 @@ public class RezervacijaDAO {
                 ps.executeUpdate();
             }
         }
-    }
 
     
     public static List<Rezervacija> dohvatiRezervacijePoImenuIPrezimenu(String ime, String prezime) throws SQLException {
@@ -226,8 +200,8 @@ public class RezervacijaDAO {
                 + "r.brojUlaznica, p.cena, l.imeLokacija, l.nazivSale, status_rezervacija.status "
                 + "from rezervacija r, lokacija l, projekcija p, status_rezervacija, film f"
                 +" WHERE r.idKorisnika = ? and p.idProjekcija = r.idProjekcija and l.idLokacija = p.idLokacija"
-                + " and status_rezervacija.idStatusRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
-                + " and status_rezervacija.idStatusRezervacije < 3;";
+                + " and status_rezervacija.idStatusaRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
+                + " and status_rezervacija.idStatusaRezervacije < 3;";
         
 
             try (
@@ -266,8 +240,8 @@ public class RezervacijaDAO {
                 + "r.brojUlaznica, p.cena, l.imeLokacija, l.nazivSale, status_rezervacija.status "
                 + "from rezervacija r, lokacija l, projekcija p, status_rezervacija, film f"
                 +" WHERE r.idKorisnika = ? and p.idProjekcija = r.idProjekcija and l.idLokacija = p.idLokacija"
-                + " and status_rezervacija.idStatusRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
-                + " and status_rezervacija.idStatusRezervacije = 3;";
+                + " and status_rezervacija.idStatusaRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
+                + " and status_rezervacija.idStatusaRezervacije = 3;";
         
 
             try (
@@ -306,8 +280,8 @@ public class RezervacijaDAO {
                 + "r.brojUlaznica, p.cena, l.imeLokacija, l.nazivSale, status_rezervacija.status "
                 + "from rezervacija r, lokacija l, projekcija p, status_rezervacija, film f"
                 +" WHERE r.idKorisnika = ? and p.idProjekcija = r.idProjekcija and l.idLokacija = p.idLokacija"
-                + " and status_rezervacija.idStatusRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
-                + " and status_rezervacija.idStatusRezervacije = 4;";
+                + " and status_rezervacija.idStatusaRezervacije = r.idStatusRezervacije and p.idFilm = f.idFilm"
+                + " and status_rezervacija.idStatusaRezervacije = 4;";
         
 
             try (

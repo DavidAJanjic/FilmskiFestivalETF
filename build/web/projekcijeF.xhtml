@@ -36,8 +36,16 @@
                                 <f:facet name="header">
                                     Originalni naziv:
                                 </f:facet>
-                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma, p.nazivFestivalaZaProjekciju)}">#{p.originalniNazivFilma}
+<!--                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma, p.nazivFestivalaZaProjekciju)}">#{p.originalniNazivFilma}
                                 <f:actionListener binding="#{projekcija.ispisNaZahtevKosinika(p.originalniNazivFilma)}" />
+                                </h:commandLink>-->
+                                <h:commandLink action="#{film.ispisFilmZaKorisnika(p.originalniNazivFilma, p.nazivFestivalaZaProjekciju)}">
+                                    <f:actionListener binding="#{projekcija.ispisNaZahtevKosinika(p.originalniNazivFilma)}" />
+                                    <h:link outcome="opisFilm_1" value="#{p.originalniNazivFilma}">
+                                        <f:param name="naziv_filma" value="#{p.originalniNazivFilma}"/>
+                                        <f:param name="naziv_festivala_za_projekciju" value="#{p.nazivFestivalaZaProjekciju}"/>
+
+                                    </h:link>
                                 </h:commandLink>
                             </h:column>
                             <h:column>

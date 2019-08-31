@@ -26,7 +26,7 @@ public class GlumciDAO {
 
             while (rs.next()) {
                 int idGlumac = rs.getInt("idGlumac");
-                String imeGlumac = rs.getString("imeGlumac");
+                String imeGlumac = rs.getString("imeGlumci");
                 
                 Glumci glumci = new Glumci();
                 glumci.setIdGlumac(idGlumac);

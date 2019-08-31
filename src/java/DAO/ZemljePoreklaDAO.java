@@ -29,7 +29,7 @@ public class ZemljePoreklaDAO {
             
             while ( rs.next() ) {
                 int idZemljePorekla = rs.getInt("idZemljePorekla");
-                String imeZemljePorekla = rs.getString("imeZemljePorekla");
+                String imeZemljePorekla = rs.getString("imeZemljaPorekla");
                 
                 ZemljePorekla zemljaPorekla = new ZemljePorekla();
                 zemljaPorekla.setIdZemljePorekla(idZemljePorekla);
